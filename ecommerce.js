@@ -53,7 +53,7 @@ while(producto.toLowerCase() != "esc"){
             alert("Los esmaltes salen $" + precio);
             compra();
             break;
-        case "carrito":
+        case "carrito".toLowerCase():
             alert("Total: $" + totalCarrito);
             producto = prompt("Consulta de precios:\nBases\nCorrectores\nPaletas\nEsmaltes\n\ncarrito\n\n(esc-para salir)");
             break;
