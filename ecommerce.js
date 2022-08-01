@@ -1,65 +1,56 @@
-let producto = prompt("Consulta de precios:\nBases\nCorrectores\nPaletas\nEsmaltes\n\ncarrito\n\n(esc-para salir)");
-let precio;
-let comprar;
-let cantidad;
-let totalProducto;
-let totalCarrito = 0;
+let inventario = prompt("Opciones de producto:\nIngresar\nEgresar\nInventario\n\n(esc-para salir)");
+const productos = [];
 
-function compra() {
-    comprar = prompt("¿Quiere agregar este producto al carrito? SI/NO");
-    if(comprar.toUpperCase() == "SI") {
-        cantidad = parseInt(prompt("Para agregar al carrito indique cantidad deseada (0 para volver a la consulta de precios)"));
-        if((cantidad > 0) && (!isNaN(cantidad))){
-            totalProducto = precio*cantidad;
-            totalCarrito = totalCarrito + totalProducto;
-            alert("El total por este producto es de $" + totalProducto);
-            producto = prompt("Consulta de precios:\nBases\nCorrectores\nPaletas\nEsmaltes\n\ncarrito\n\n(esc-para salir)");
-        }
-        else if((cantidad == 0) && (!isNaN(cantidad))) {
-            producto = prompt("Consulta de precios:\nBases\nCorrectores\nPaletas\nEsmaltes\n\ncarrito\n\n(esc-para salir)");
-        }
-        else{
-            alert("Esa cantidad no es valida");
-        }
-    }
-    else if(comprar.toUpperCase() == "NO") {
-        producto = prompt("Consulta de precios:\nBases\nCorrectores\nPaletas\nEsmaltes\n\ncarrito\n\n(esc-para salir)");
-    }
-    else {
-        alert("Lo siento, no te entendí");
-    }
-    return totalProducto;
+class Producto {
+    constructor(nombre, precio, cantidad) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = cantidad;
+      }
 }
 
-while(producto.toLowerCase() != "esc"){
-    switch(producto.toLowerCase()) {
-        case "bases":
-            precio = 15000;
-            alert("Las bases salen $" + precio);
-            compra();
-            break;
-        case "correctores":
-            precio = 8000;
-            alert("Los correctores salen $" + precio);
-            compra();
-            break;
-        case "paletas":
-            precio = 20000;
-            alert("Las paletas salen $" + precio);
-            compra();
-            break;
-        case "esmaltes":
-            precio = 3000;
-            alert("Los esmaltes salen $" + precio);
-            compra();
-            break;
-        case "carrito".toLowerCase():
-            alert("Total: $" + totalCarrito);
-            producto = prompt("Consulta de precios:\nBases\nCorrectores\nPaletas\nEsmaltes\n\ncarrito\n\n(esc-para salir)");
-            break;
-        default:
-            alert("Este producto no esta en stock");
-            producto = prompt("Consulta de precios:\nBases\nCorrectores\nPaletas\nEsmaltes\n\ncarrito\n\n(esc-para salir)");
-            break;
+productos.push(new Producto("Bases", 15000, 10));
+productos.push(new Producto("Correctores", 8000, 10));
+productos.push(new Producto("Paletas", 20000, 10));
+productos.push(new Producto("Esmaltes", 3000, 10));
+
+function ingresarProducto() {
+    let nombre = prompt("Ingresar nombre del producto");
+    let precio = parseFloat(prompt("Ingresar precio del producto"));
+    let cantidad = parseInt(prompt("Ingresar cantidad del producto"));
+    if(nombre != "" && !isNaN(precio) && !isNaN(cantidad)){
+        productos.push(new Producto(nombre, precio, cantidad));
+        inventario = prompt("Opciones de producto:\nIngresar\nEgresar\nInventario\n\n(esc-para salir)");
+    }else{
+        alert("Parámetros incorrectos")
     }
 }
+
+function egresarProducto() {
+    let productoPorNombre = prompt("Ingrese el nombre del producto");
+    for (const producto of productos) {
+        if(producto.nombre.toLowerCase() == productoPorNombre.toLowerCase()){
+            let posicion = productos.indexOf(producto);
+            productos.splice(posicion, 1);
+            inventario = prompt("Opciones de producto:\nIngresar\nEgresar\nInventario\n\n(esc-para salir)");
+        }
+    }
+}
+
+
+while(inventario.toLowerCase() != "esc"){
+    if(inventario.toLowerCase() == "ingresar") {
+        ingresarProducto();
+    }else if(inventario.toLowerCase() == "egresar"){
+        egresarProducto();
+    }
+    else if(inventario.toLowerCase() == "inventario"){
+        console.table(productos);
+        inventario = prompt("Opciones de producto:\nIngresar\nEgresar\nInventario\n\n(esc-para salir)");
+    }
+}
+
+
+
+
+
