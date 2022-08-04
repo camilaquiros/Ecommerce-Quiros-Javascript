@@ -114,7 +114,7 @@ function egresarProducto() {
   }
 }
 
-// UNA FUNCION DE BUSCADOR DE PRODUCTOS SOLO POR NOMBRE
+// UNA FUNCIÓN DE BUSCADOR DE PRODUCTOS SOLO POR NOMBRE
 function buscador(){
     let buscar = prompt("¿Que estas buscando?");
     let encontrar = productos.find((producto)=>producto.nombre == buscar);
