@@ -1,0 +1,42 @@
+main {
+    background-color: $violeta;
+    @include flex(flex, null, null, null, center);
+}
+
+.menu {
+    @include flex(flex, wrap, null, space-around, null);
+    width: 90%;
+    margin: 1% 0 5% 0;
+}
+
+.categoria {
+    position: relative;
+    width: 40%;
+    animation-duration: 1s;
+    margin-top: 3%;
+
+    img {
+        width: 100%;
+        border-radius: 25px;
+        border: 3px dashed $amarillo;
+        padding: 0.5%;
+        position: relative;
+    }
+
+    p {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: $amarillo;
+        font-weight: bold;
+        font-size: 5em;
+        color: $turquesa;
+        -webkit-text-stroke: 1px $amarillo;
+    }
+
+    &:hover {
+        transform: scale(1.05, 1.05);
+        transition: all 0.5s;
+      }
+}

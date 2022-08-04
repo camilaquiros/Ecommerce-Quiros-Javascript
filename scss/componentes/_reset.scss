@@ -1,0 +1,76 @@
+/* RESETEO */
+
+* {
+  margin: 0%;
+  padding: 0%;
+  scrollbar-width: thin;
+  scrollbar-color: $turquesa $amarillo;
+
+  &::selection {
+    background-color: $turquesa;
+    color: $amarillo;
+  }
+
+  &::-moz-selection {
+    background-color: $turquesa;
+    color: $amarillo;
+  }
+
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: $amarillo;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: $turquesa;
+    border-radius: 20px;
+  }
+}
+
+html {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: $sansserif;
+  @include flex(flex, null, column, space-between, null);
+  min-height: 100vh;
+  height: 100%;
+  padding-right: 0 !important;
+
+  cursor:url("../assets/cursor.png"), auto;
+
+  &:active{
+    cursor: url("../assets/cursorHover.png"), auto;
+  }
+}
+
+main {
+  @include flex(flex, null, column, flex-start, null);
+  overflow-x: hidden;
+  height: fit-content;
+  height: 100%;
+}
+
+a {
+  text-decoration: map-get($textos, textDecoration);
+  color: map-get($textos, color);
+  &:hover{
+    color: map-get($textos, color);
+  }
+}
+
+li {
+  list-style-type: none;
+}
+
+a, button{
+  cursor: url("../assets/cursorHover.png"), auto !important;
+  &:hover{
+  cursor: url("../assets/cursorHover.png"), auto;
+  }
+}

@@ -1,0 +1,26 @@
+header{
+    @include flex(flex, null, null, center, null);
+    background-image: url(../assets/background.svg);
+    background-repeat: repeat;
+    background-size: contain;
+    background-size: 10%;
+    padding: 3% 0;
+
+    h1{
+        text-align: map-get($textos, textAlign);
+        padding: 1%;
+        border-style: dashed;
+        border-radius: 25px;
+        background: linear-gradient(120deg, rgba(242,255,141,0.8) 12%, rgba(255,153,193,0.8) 34%, rgba(191,158,236,0.8) 68%, rgba(4,186,216,0.8) 90%);
+        backdrop-filter: blur(1px);
+        color: map-get($textos, color);
+        font-family: $serif;
+        font-size: 3em;
+        font-weight: bold;
+        margin: 0;
+      
+        &:hover {
+          background: linear-gradient(120deg, $amarillo 12%, $rosado 34%, $violeta 68%, $turquesa 90%);
+        }
+    }
+}
