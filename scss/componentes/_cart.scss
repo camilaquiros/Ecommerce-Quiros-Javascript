@@ -1,0 +1,53 @@
+#cart {
+    @include flex(flex, wrap, null, center, center);
+    margin: 2% 0;
+}
+
+.productoCart {
+    @include flex(flex, wrap, row, center, center);
+    width: 70%;
+    margin: 1% 0;
+    border: dashed $amarillo;
+    padding: 0.5%;
+    border-radius: 15px;
+
+    img{
+        width: 10%;
+        border-radius: 15px 0 0 15px;
+    }
+
+    p{
+        margin: 0;
+        font-size: 1.5vw;
+        background-color: $turquesa;
+        width: 30%;
+        text-align: center;
+        height: max-content;
+        color: $amarillo;
+        padding: 3.35%;
+
+        &:nth-child(2) {
+            font-weight: bolder;
+            width: 40%;
+        }
+    }
+
+    button {
+        border: none;
+        background-color: $rosado;
+        color: $amarillo;
+        font-size: 1.5vw;
+        padding: 3.35%;
+        border-radius: 0 10px 10px 0;
+        width: 20%;
+    }
+}
+
+#cleanCart{
+    border: dashed $negro;
+    padding: 0.5% 1%;
+    margin-bottom: 3%;
+    font-size: 1.5vw;
+    background-color: $rosado;
+    color: $amarillo;
+}

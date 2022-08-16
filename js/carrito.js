@@ -1,0 +1,3 @@
+imprimirCarrito();
+// botonEliminarDelCarrito();
+vaciarCarrito();

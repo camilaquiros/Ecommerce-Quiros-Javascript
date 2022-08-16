@@ -35,18 +35,34 @@
         </div>
     </header>
     <main>
-        <div id="categorias">
+        <div class="contact">
+            <h2>CONTACTO</h2>
+            <form action="" method="" enctype="">
+                <div class="mb-3 col-sm-7 contactForm">
+                    <label for="formGroupExampleInput" class="form-label">Nombre:</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput">
+                </div>
+                <div class="mb-3 col-sm-7 contactForm">
+                    <label for="exampleFormControlInput1" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                </div>
+                <div class="mb-3 contactForm">
+                    <label for="exampleFormControlTextarea1" class="form-label">Contanos como podemos ayudarte</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                </div>
+                <div class="col-12 contactForm">
+                    <button class="btn btn-primary animate__headShake" id="button" type="submit">Enviar</button>
+                </div>
+            </form>
         </div>
-        <button id="allProducts">Mostrar todos los productos</button>
-        <div id="productos"></div>
     </main>
     <footer>
         <!-- NAVBAR FOOTER -->
         <div class="footerRight">
             <ul class="footerNav">
-                <li><a href="./index.html">Inicio</a></li>
+                <li><a href="../index.html">Inicio</a></li>
                 <li><a href="./allProducts.html">Productos</a></li>
-                <li><a href="./contact.html">Contacto</a></li>
+                <li><a href=".contact.html">Contacto</a></li>
             </ul>
             <!-- INFO ADICIONAL (COPYRIGHT AÑO ETC.) -->
             <p>Desarrollado por <a href="https://portafolio-camilaq.000webhostapp.com/index.html">Camila Quirós</a></p>
@@ -69,8 +85,6 @@
         <!-- INFO ADICIONAL (COPYRIGHT AÑO ETC.) -->
         <p class="parrafoMobile">Desarrollado por <a href="https://portafolio-camilaq.000webhostapp.com/index.html">Camila Quirós</a></p>
     </footer>
-    <script src="./js/products.js"></script>
     <script src="./js/main.js"></script>
-    <script src="./js/index.js"></script>
 </body>
 </html>

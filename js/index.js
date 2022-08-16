@@ -1,0 +1,2 @@
+imprimirCategorias();
+botonMostrarTodos();

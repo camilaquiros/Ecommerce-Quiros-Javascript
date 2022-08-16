@@ -1,0 +1,3 @@
+imprimirProductos();
+botonAgregarCarrito();
+
