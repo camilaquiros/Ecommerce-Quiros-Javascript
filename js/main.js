@@ -8,9 +8,7 @@ itemsCarrito();
 
 // cargar los elementos del carro abandonado a la tabla
 function traerCarrito(){
-    if(localStorage.getItem("carrito")){
-        carrito=JSON.parse(localStorage.getItem("carrito"));
-    }
+        carrito=JSON.parse(localStorage.getItem("carrito")) || [];
 }
 
 function imprimirCategorias(){
@@ -60,13 +58,7 @@ function botonAgregarCarrito(){
     productos.forEach(producto =>{
         document.getElementById(`addCart${producto.id}`).addEventListener("click",function(){
             let cantidad = producto.cantidad;
-            if(cantidad > 0){
-                agregarAlCarrito(producto);
-                cantidad--;
-                console.log(cantidad);
-            }else{
-                alert("No hay stock");
-            }
+            cantidad > 0? agregarAlCarrito(producto):alert("No hay stock");
         });
     });
 }
