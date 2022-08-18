@@ -4,7 +4,10 @@ header{
   background-repeat: repeat;
   background-size: contain;
   background-size: 10%;
-  padding: 2%;
+  padding: 1% 2%;
+  position: sticky;
+  top: 0;
+  z-index: 3;
 }
 
 .menu{
@@ -27,7 +30,7 @@ header{
   color: map-get($textos, color);
   font-family: $serif;
   font-weight: bolder;
-  font-size: 3vw;
+  font-size: 2.5vw;
 
   &:hover {
     background: linear-gradient(120deg, $amarillo 12%, $rosado 34%, $violeta 68%, $turquesa 90%);
@@ -37,7 +40,7 @@ header{
 .iconos {
   @include flex(flex, wrap, null, space-between ,center);
   align-self: flex-start;
-  width: 18vw;
+  width: 20vw;
 
   input{
     border-radius: 5px;
@@ -51,7 +54,15 @@ header{
 
   i{
     color: $negro;
-    font-size: 1.5vw;
+    font-size: 2vw;
     background-color: transparentize(white, 0.1);
   }
+}
+
+.items{
+  background-color: $rosado;
+  color: $amarillo;
+  font-weight: bold;
+  font-size: 0.9vw;
+  font-family: $serif;
 }

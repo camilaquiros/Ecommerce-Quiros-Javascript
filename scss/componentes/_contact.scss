@@ -40,13 +40,13 @@
   @extend %rosado;
   color: $amarillo;
   font-size: 1em;
-  border-radius: 5px;
+  border-radius: 10px;
   height: 10%;
   display: block;
   width: 30%;
   animation-duration: 1s;
   animation-iteration-count: infinite;
-  border: 3px dashed $negro;
+  border: 3px solid $negro;
   z-index: 1;
   transition: all 0.3s ease;
   position: relative;
@@ -60,7 +60,7 @@
     right: 0;
     z-index: -1;
     background-color: $turquesa;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: all 0.3s ease;
   }
 

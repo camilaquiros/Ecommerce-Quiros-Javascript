@@ -1,6 +1,8 @@
 main {
     background-color: $violeta;
-    @include flex(flex, null, null, null, center);
+    @include flex(flex, null, column, null, center);
+    overflow-x: hidden;
+    flex: 1;
 }
 
 #allProducts {
@@ -14,7 +16,7 @@ main {
     display: block;
     animation-duration: 1s;
     animation-iteration-count: infinite;
-    border: 3px dashed $negro;
+    border: 3px solid $negro;
     z-index: 1;
     transition: all 0.3s ease;
     position: relative;
@@ -119,4 +121,31 @@ main {
         transform: scale(1.05, 1.05);
         transition: all 0.5s;
       }
+}
+
+.swal-overlay{
+    background-color: transparent;
+}
+
+.swal-modal{
+    position: fixed;
+    background-color: $amarillo;
+    left: 30%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: 40%;
+}
+
+.swal-text{
+    color: $turquesa;
+    font-weight: bold;
+    font-size: 1.2vw;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+
+    &:first-child{
+        margin: 1% 0;
+    }
 }

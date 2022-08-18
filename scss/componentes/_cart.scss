@@ -3,51 +3,206 @@
     margin: 2% 0;
 }
 
-.productoCart {
-    @include flex(flex, wrap, row, center, center);
-    width: 70%;
-    margin: 1% 0;
-    border: dashed $amarillo;
-    padding: 0.5%;
-    border-radius: 15px;
+.productoCart{
+    @include flex(flex, wrap, null, center, center);
+    width: 100%;
+}
 
-    img{
-        width: 10%;
-        border-radius: 15px 0 0 15px;
+.inputCart{
+    display: inline-block;
+    vertical-align: top;
+    background-color: $rosado;
+    border: none;
+    text-align: center;
+    font-weight: bold;
+    color: $amarillo;
+    font-size: 2vw;
+    height: 50%;
+    width: 30%;
+    font-family: $serif;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.value-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vw;
+    height: 50%;
+    width: 25%;
+    background-color: $amarillo;
+    color: $negro;
+    font-family: $serif;
+
+    &:first-child {
+        border-radius: 10px 0 0 10px;
     }
 
-    p{
-        margin: 0;
-        font-size: 1.5vw;
-        background-color: $turquesa;
-        width: 30%;
-        text-align: center;
-        height: max-content;
-        color: $amarillo;
-        padding: 3.35%;
-
-        &:nth-child(2) {
-            font-weight: bolder;
-            width: 40%;
-        }
-    }
-
-    button {
-        border: none;
-        background-color: $rosado;
-        color: $amarillo;
-        font-size: 1.5vw;
-        padding: 3.35%;
+    &:last-child {
         border-radius: 0 10px 10px 0;
-        width: 20%;
     }
 }
 
+.listaCarrito{
+    width: 55%;
+    align-self: center;
+    margin-bottom: 2%;
+    padding: 0.5%;
+    border: dashed $amarillo;
+    border-radius: 15px;
+}
+
+.itemCarrito{
+    @include flex(flex, null, null, center, center);
+    background-color: $turquesa;
+    border: 0;
+    padding: 0;
+
+    img{
+        width: 100%;
+        height: 100%;
+        border-radius: 10px 0 0 10px;
+    }
+
+    &:first-child{
+        width: 10%;
+        background-color: transparent;
+    }
+
+    &:nth-child(2){
+        width: 30%;
+
+        p {
+            margin: 0;
+            font-size: 1.5vw;
+            font-weight: bold;
+            color: $negro;
+        }
+    }
+
+    &:nth-child(3){
+        width: 10%;
+
+        p {
+            margin: 0;
+            font-size: 1.1vw;
+            color: $negro;
+        }
+    }
+
+    &:nth-child(4){
+        width: 20%;
+    }
+
+    &:nth-child(5){
+        width: 15%;
+
+        p {
+            margin: 0;
+            font-size: 1.5vw;
+            color: $negro;
+            font-weight: bold;
+        }
+    }
+
+    &:nth-child(6){
+        width: 15%;
+        background-color: transparent;
+
+        button{
+            border: 0;
+            height: 100%;
+            width: 100%;
+            background-color: $rosado;
+            color: $amarillo;
+            font-weight: bold;
+            border-radius: 0 10px 10px 0;
+            font-size: 1.2vw;
+        }
+    }
+}
+
+#total{
+    font-size: 2vw;
+}
+
+.botonesCart{
+    @include flex(flex, wrap, row, space-around, null);
+    width: 50%;
+    margin-bottom: 3%;
+}
+
 #cleanCart{
-    border: dashed $negro;
-    padding: 0.5% 1%;
+    padding: 1% 2%;
+    font-size: 1.5vw;
+    background-color: $blanco;
+    color: $negro;
+    border-radius: 10px;
+    display: block;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    border: 3px solid $negro;
+    z-index: 1;
+    transition: all 0.3s ease;
+    position: relative;
+    height: 100%;
+
+    &::after {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 100%;
+        top: 0;
+        right: 0;
+        z-index: -1;
+        background-color: $amarillo;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+      }
+    
+      &:hover::after {
+        left: 0;
+        width: 100%;
+      }
+}
+
+#buy{
+    padding: 1% 2%;
     margin-bottom: 3%;
     font-size: 1.5vw;
     background-color: $rosado;
     color: $amarillo;
+    font-weight: bold;
+    box-sizing: content-box;
+    border-radius: 10px;
+    display: block;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    border: 3px solid $negro;
+    z-index: 1;
+    transition: all 0.3s ease;
+    position: relative;
+
+    &::after {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 100%;
+        top: 0;
+        right: 0;
+        z-index: -1;
+        background-color: $turquesa;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+      }
+    
+      &:hover::after {
+        left: 0;
+        width: 100%;
+      }
 }

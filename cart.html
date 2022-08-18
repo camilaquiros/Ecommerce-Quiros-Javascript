@@ -31,14 +31,17 @@
         <div class="iconos">
             <input type="text" placeholder=" &#xf002; Buscar..." style="font-family:Arial, FontAwesome">
             <a href=""><i class="fa-solid fa-user"></i></a>
-            <a href="./cart.html"><i class="fa-solid fa-cart-shopping"></i><span class="items"></span></a>
+            <a href="./cart.html" class="cart position-relative"><i class="fa-solid fa-cart-shopping"></i><span class="items position-absolute top-0 start-100 translate-middle badge rounded-pill"></span></a>
         </div>
     </header>
     <main>
         <div id="cart">
         </div>
-        <a href="" id="cleanCart">Vaciar el carrito</a>
         <p id="total"></p>
+        <div class="botonesCart">
+            <a href="" id="cleanCart">Vaciar el carrito</a>
+            <a href="" id="buy">Comprar</a>
+        </div>
     </main>
     <footer>
         <!-- NAVBAR FOOTER -->
@@ -69,6 +72,8 @@
         <!-- INFO ADICIONAL (COPYRIGHT AÑO ETC.) -->
         <p class="parrafoMobile">Desarrollado por <a href="https://portafolio-camilaq.000webhostapp.com/index.html">Camila Quirós</a></p>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="./js/products.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/carrito.js"></script>

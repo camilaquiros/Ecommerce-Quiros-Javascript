@@ -32,7 +32,7 @@
 
 html {
   width: 100%;
-  overflow-x: hidden;
+  // overflow-x: hidden;
 }
 
 body {
@@ -41,19 +41,15 @@ body {
   min-height: 100vh;
   height: 100%;
   padding-right: 0 !important;
+  // overflow-x: hidden;
+
+  
 
   cursor:url("../assets/cursor.png"), auto;
 
   &:active{
     cursor: url("../assets/cursorHover.png"), auto;
   }
-}
-
-main {
-  @include flex(flex, null, column, flex-start, null);
-  overflow-x: hidden;
-  height: fit-content;
-  height: 100%;
 }
 
 a {

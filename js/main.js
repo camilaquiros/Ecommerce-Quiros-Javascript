@@ -59,14 +59,28 @@ function botonAgregarCarrito(){
         document.getElementById(`addCart${producto.id}`).addEventListener("click",function(){
             let cantidad = producto.cantidad;
             cantidad > 0? agregarAlCarrito(producto):alert("No hay stock");
+            itemsCarrito();
         });
     });
 }
 
 function agregarAlCarrito(producto){
-    let productoNuevo = new Carrito(producto, 1);
-    carrito.push(productoNuevo);
-    alert("Producto: "+producto.nombre+" agregado al carro!");
+    let elementoExistente = carrito.find((elemento) => elemento.producto.id == producto.id);
+
+    if(elementoExistente) {
+        elementoExistente.cantidad+=1;
+    } else {
+        let productoNuevo = new Carrito(producto, 1);
+        carrito.push(productoNuevo);
+    }
+
+    swal({
+        text: `${producto.nombre} agregado al carrito de compra`,
+        className: "swalPersonalizado",
+        timer: 1500,
+        buttons: false,
+    });
+
     localStorage.setItem("carrito",JSON.stringify(carrito));
 }
 
@@ -80,12 +94,19 @@ function imprimirCarrito(){
             let productoCart = document.createElement("div");
             productoCart.className = "productoCart";
             productoCart.innerHTML += `
-                    <img src="./assets/${elemento.producto.imagen}" alt="${elemento.producto.imagen}">
-                    <p>${elemento.producto.nombre}</p>
-                    <input id="cantidad-producto-${elemento.producto.id}" type="number" value="${elemento.cantidad}" min="1" max="1000" step="1" style="width: 50px;"/>
-                    <p>$${estandarPrecio.format(precioConIva)}</p>
-                    <p>$${estandarPrecio.format(precioConIva*elemento.cantidad)}</p>
-                    <button id="removeCart${elemento.producto.id}">ELIMINAR</button>
+                    <ul class="list-group list-group-horizontal listaCarrito">
+                    <li class="list-group-item itemCarrito"><img src="./assets/${elemento.producto.imagen}" alt="${elemento.producto.imagen}"></li>
+                    <li class="list-group-item itemCarrito"><p>${elemento.producto.nombre}</p></li>
+                    <li class="list-group-item itemCarrito"><p>$${estandarPrecio.format(precioConIva)}</p></li>
+                    <li class="list-group-item itemCarrito">
+                    <div class="value-button" id="decrease ${elemento.producto.id}" value="Decrease Value">-</div>
+                    <input type="number" class="inputCart" id="cantidad-producto-${elemento.producto.id}" value="${elemento.cantidad}" min="1" max="1000" step="1"/>
+                    <div class="value-button" id="increase ${elemento.producto.id}" value="Increase Value">+</div></li>
+                    <li class="list-group-item itemCarrito"><p>$${estandarPrecio.format(precioConIva*elemento.cantidad)}</p></li>
+                    <li class="list-group-item itemCarrito"><button id="removeCart${elemento.producto.id}">ELIMINAR <i class="fa-solid fa-trash-can"></i></button></li>
+                  </ul>
+
+
                 `;
 
             cardCarrito.append(productoCart);
@@ -94,9 +115,32 @@ function imprimirCarrito(){
 
             let cantidadProductos = document.getElementById(`cantidad-producto-${elemento.producto.id}`);
 
-            cantidadProductos.addEventListener("change", (e) => {
-                let nuevaCantidad = e.target.value;
-                elemento.cantidad = nuevaCantidad;
+            let value = parseInt(cantidadProductos.value);
+
+            function decreaseValue() { 
+                value = isNaN(value) ? 1 : value;
+                value < 2 ? value = 2 : '';
+                value--;
+                cantidadProductos.value = value;
+                elemento.cantidad = parseInt(cantidadProductos.value);
+                imprimirCarrito();
+            }
+            
+            function increaseValue() {
+                value = isNaN(value) ? 1 : value;
+                value++;
+                cantidadProductos.value = value;
+                elemento.cantidad = parseInt(cantidadProductos.value);
+                imprimirCarrito();
+            }
+
+            document.getElementById(`decrease ${elemento.producto.id}`).onclick=()=>decreaseValue();
+            document.getElementById(`increase ${elemento.producto.id}`).onclick=()=>increaseValue();
+
+            let borrarProducto = document.getElementById(`removeCart${elemento.producto.id}`);
+
+            borrarProducto.addEventListener("click", (e) => {
+                eliminarProductoCarrito(elemento);
                 imprimirCarrito();
             });
 
@@ -108,23 +152,11 @@ function imprimirCarrito(){
     totalCompra.innerText = `TOTAL: $${estandarPrecio.format(total)}`
 }
 
-// function botonEliminarDelCarrito(){
-//     carrito.forEach(elemento =>{
-//         document.getElementById(`removeCart${elemento.producto.id}`).addEventListener("click",function(){
-//             eliminarDelCarrito(elemento.producto);
-//         });
-//     });
-// }
-
-// function eliminarDelCarrito(elemento){
-//     let eliminado = carrito.indexOf(elemento.producto);
-//     let index = carrito.map(elemento => elemento.producto.id).indexOf();
-//     console.log(eliminado);
-
-//     // carrito.splice(index, 1);
-//     // alert("Producto: "+elemento.producto.nombre+" eliminado del carro!");
-//     localStorage.setItem("carrito",JSON.stringify(carrito));
-// }
+function eliminarProductoCarrito(elementoAEliminar) {
+    const elementosAMantener = carrito.filter((elemento) => elementoAEliminar.producto.id != elemento.producto.id);
+    carrito.length = 0;
+    elementosAMantener.forEach((elemento) => carrito.push(elemento));
+}
 
 function itemsCarrito(){
     let cantidad = 0;
@@ -138,7 +170,9 @@ function itemsCarrito(){
 
 function vaciarCarrito(){
     document.getElementById("cleanCart").addEventListener("click", function(){
-        carrito = []
+        carrito.length = 0;
         localStorage.setItem("carrito",JSON.stringify(carrito));
     });
 }
+
+
