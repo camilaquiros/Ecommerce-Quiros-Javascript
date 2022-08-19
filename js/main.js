@@ -2,9 +2,11 @@ let cardProducto = document.getElementById("productos");
 let botonTodosLosProductos = document.getElementById("allProducts");
 let caratulas=document.getElementById("categorias");
 let cardCarrito = document.getElementById("cart");
+let divLista = document.getElementById("divLista");
 
 traerCarrito();
 itemsCarrito();
+buscador();
 
 // cargar los elementos del carro abandonado a la tabla
 function traerCarrito(){
@@ -74,12 +76,15 @@ function agregarAlCarrito(producto){
         carrito.push(productoNuevo);
     }
 
-    swal({
+    Toastify({
         text: `${producto.nombre} agregado al carrito de compra`,
-        className: "swalPersonalizado",
-        timer: 1500,
-        buttons: false,
-    });
+        duration: 1500,
+        position: 'center',
+        className: "toastPersonalizado",
+        style: {
+            background: "#F2FF8D",
+        }
+    }).showToast();
 
     localStorage.setItem("carrito",JSON.stringify(carrito));
 }
@@ -94,19 +99,24 @@ function imprimirCarrito(){
             let productoCart = document.createElement("div");
             productoCart.className = "productoCart";
             productoCart.innerHTML += `
-                    <ul class="list-group list-group-horizontal listaCarrito">
-                    <li class="list-group-item itemCarrito"><img src="./assets/${elemento.producto.imagen}" alt="${elemento.producto.imagen}"></li>
-                    <li class="list-group-item itemCarrito"><p>${elemento.producto.nombre}</p></li>
-                    <li class="list-group-item itemCarrito"><p>$${estandarPrecio.format(precioConIva)}</p></li>
+                <ul class="list-group list-group-horizontal listaCarrito">
+                    <li class="list-group-item itemCarrito"><img src="./assets/${elemento.producto.imagen}" alt="${elemento.producto.nombre}"></li>
                     <li class="list-group-item itemCarrito">
-                    <div class="value-button" id="decrease ${elemento.producto.id}" value="Decrease Value">-</div>
-                    <input type="number" class="inputCart" id="cantidad-producto-${elemento.producto.id}" value="${elemento.cantidad}" min="1" max="1000" step="1"/>
-                    <div class="value-button" id="increase ${elemento.producto.id}" value="Increase Value">+</div></li>
+                        <p>${elemento.producto.nombre}</p>
+                    </li>
+                    <li class="list-group-item itemCarrito">
+                        <p>$${estandarPrecio.format(precioConIva)}</p>
+                    </li>
+                    <li class="list-group-item itemCarrito">
+                        <div class="value-button" id="decrease ${elemento.producto.id}" value="Decrease Value">-</div>
+                        <input type="number" class="inputCart" id="cantidad-producto-${elemento.producto.id}" value="${elemento.cantidad}" min="1" max="1000" step="1"/>
+                        <div class="value-button" id="increase ${elemento.producto.id}" value="Increase Value">+</div>
+                    </li>
                     <li class="list-group-item itemCarrito"><p>$${estandarPrecio.format(precioConIva*elemento.cantidad)}</p></li>
-                    <li class="list-group-item itemCarrito"><button id="removeCart${elemento.producto.id}">ELIMINAR <i class="fa-solid fa-trash-can"></i></button></li>
-                  </ul>
-
-
+                    <li class="list-group-item itemCarrito">
+                        <button id="removeCart${elemento.producto.id}">ELIMINAR <i class="fa-solid fa-trash-can"></i></button>
+                    </li>
+                </ul>
                 `;
 
             cardCarrito.append(productoCart);
@@ -174,5 +184,54 @@ function vaciarCarrito(){
         localStorage.setItem("carrito",JSON.stringify(carrito));
     });
 }
+
+function buscador(){
+    buscar = document.getElementById("buscador");
+    divBuscador = document.getElementById("divBuscador");
+    buscar.addEventListener("input", () => {
+        divLista.innerHTML = "";
+        divLista.style.border = "none";
+        let filtro = productos.filter((item)=>item.nombre.toLowerCase().includes(buscar.value.toLowerCase()));
+        if(buscar.value.length > 1 && filtro.length != 0){
+            console.log(filtro)
+            filtro.forEach((item) => {
+                let cartaSugerencia = document.createElement("div");
+                cartaSugerencia.className = "card mb-3 divCarta";
+                cartaSugerencia.innerHTML = `
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="./assets/${item.imagen}" class="img-fluid rounded-start" alt="${item.nombre}">
+                        </div>
+                        <div class="col-md-8 cardBodyContainer">
+                            <div class="card-body cardBody">
+                                <h5 class="card-title">${item.nombre}</h5>
+                                <p class="card-text">$${item.precio}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                divLista.append(cartaSugerencia);
+            }) 
+            divBuscador.appendChild(divLista);
+            divLista.style.border = "dashed #393838";
+            buscador();
+        }else if(buscar.value.length > 1 && filtro.length === 0){
+            console.log("no hay productos");
+            let buscadorVacio = document.createElement("div");
+            buscadorVacio.className = "buscadorVacio";
+            buscadorVacio.innerHTML = `
+                <p>Lo siento, no encontramos tu producto <i class="fa-solid fa-face-frown"></i></p>
+            `;
+            divLista.append(buscadorVacio);
+            divBuscador.appendChild(divLista);
+            divLista.style.border = "dashed #393838";
+            buscador();
+        }
+
+    });
+
+};
+
+
 
 

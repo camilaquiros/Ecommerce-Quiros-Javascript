@@ -123,29 +123,12 @@ main {
       }
 }
 
-.swal-overlay{
-    background-color: transparent;
-}
-
-.swal-modal{
-    position: fixed;
+.toastPersonalizado{
     background-color: $amarillo;
-    left: 30%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-width: 40%;
-}
-
-.swal-text{
     color: $turquesa;
     font-weight: bold;
     font-size: 1.2vw;
-    margin: 0;
-    width: 100%;
     text-align: center;
-
-    &:first-child{
-        margin: 1% 0;
-    }
+    border-radius: 15px;
+    border: dashed $negro;
 }

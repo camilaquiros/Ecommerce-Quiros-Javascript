@@ -45,7 +45,7 @@ header{
   input{
     border-radius: 5px;
     border: 2px dashed $negro;
-    width: 70%;
+    width: 100%;
 
     &:focus::placeholder {
       color: transparent;
@@ -56,6 +56,76 @@ header{
     color: $negro;
     font-size: 2vw;
     background-color: transparentize(white, 0.1);
+  }
+}
+
+#divBuscador{
+  position: relative;
+  width: 70%;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+#divLista{
+  position: absolute;
+  z-index: 99;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 52vh;
+  overflow-y: scroll;
+  margin-top: 2%;
+  border-radius: 15px;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+.divCarta, .buscadorVacio{
+  width: 100%;
+  margin-bottom: 0 !important;
+  background-color: $amarillo;
+  color: $negro;
+  border-bottom: $negro;
+  border-radius: 0;
+}
+
+.buscadorVacio {
+  @include flex(flex, null, null, center, center);
+
+  p {
+    margin: 0;
+    width: 90%;
+    font-size: 1.5vw;
+    text-align: center;
+  }
+
+  i {
+    background-color: $amarillo;
+    font-size: 1.3vw;
+  }
+}
+
+.cardBodyContainer{
+  @include flex(flex, null, column, center, flex-start);
+}
+
+.cardBody{
+  padding: 0;
+  padding-left: 10%;
+  flex: 0;
+
+  h5{
+    font-size: 1.2vw;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  p{
+    font-size: 1vw;
   }
 }
 

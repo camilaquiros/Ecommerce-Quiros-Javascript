@@ -1,4 +1,4 @@
-const productos = [];
+let productos = [];
 let carrito = [];
 const categorias = [];
 
