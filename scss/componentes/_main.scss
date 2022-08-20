@@ -5,6 +5,11 @@ main {
     flex: 1;
 }
 
+body.swal2-shown > [aria-hidden="true"] {
+    transition: 0.001s filter;
+    filter: blur(10px);
+  }
+
 #allProducts {
     margin: 2% 0;
     padding: 0.5% 1%;
