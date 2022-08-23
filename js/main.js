@@ -4,10 +4,17 @@ let caratulas=document.getElementById("categorias");
 let divLista = document.getElementById("divLista");
 let total = 0;
 
+
 traerCarrito();
 itemsCarrito();
 buscador();
 imprimirCarrito();
+
+
+function setearCarrito(){
+    localStorage.setItem("carrito",JSON.stringify(carrito));
+}
+
 // cargar los elementos del carro abandonado a la tabla
 function traerCarrito(){
         carrito=JSON.parse(localStorage.getItem("carrito")) || [];
@@ -86,172 +93,179 @@ function agregarAlCarrito(producto){
         }
     }).showToast();
 
-    localStorage.setItem("carrito",JSON.stringify(carrito));
+    setearCarrito();
 }
 
-function dibujarSwal(){
-    let cartIcon = document.getElementById("cartIcon");
-    cartIcon.addEventListener("click", (e) => {
-        Swal.fire({
-            title: 'Carrito de compras',
-            customClass: "cart",
-            position: 'top-end',
-            html: " ",
-            footer:`<p id="total"></p><div class="botonesCart"><a href="" id="cleanCart">Vaciar el carrito</a><a href="" id="buy">Comprar</a></div>`,
-            showClass: {
-              popup: `
-                animate__animated
-                animate__fadeInRight
-                animate__faster
-              `
-            },
-            hideClass: {
-              popup: `
-                animate__animated
-                animate__fadeOutRight
-                animate__faster
-              `
-            },
-            grow: 'column',
-            width: "40%",
-            background: '#BF9EEC',
-            showConfirmButton: false,
-            showCloseButton: true,
-        });
-        let cardCarrito = Swal.getHtmlContainer();
-        console.log(cardCarrito);
-    });
-}
 
 function imprimirCarrito(){
     let cartIcon = document.getElementById("cartIcon");
     cartIcon.addEventListener("click", (e) => {
-        Swal.fire({
-            title: 'Carrito de compras',
-            customClass: "cart",
-            position: 'top-end',
-            html: " ",
-            footer:`<p id="total"></p><div class="botonesCart"><a href="" id="cleanCart">Vaciar el carrito</a><a href="" id="buy">Comprar</a></div>`,
-            showClass: {
-              popup: `
-                animate__animated
-                animate__fadeInRight
-                animate__faster
-              `
-            },
-            hideClass: {
-              popup: `
-                animate__animated
-                animate__fadeOutRight
-                animate__faster
-              `
-            },
-            grow: 'column',
-            width: "40%",
-            background: '#BF9EEC',
-            showConfirmButton: false,
-            showCloseButton: true,
-        });
-        let cardCarrito = Swal.getHtmlContainer();
-        console.log(cardCarrito);
-        console.log(carrito);
-        cardCarrito.innerHTML = "";
-        carrito.forEach((elemento) => {
-            let precioConIva = elemento.producto.precio * 1.21;
-            let productoCart = document.createElement("div");
-            productoCart.className = "productoCart";
-            productoCart.innerHTML += `
-            <div class="card mb-3 cartaCarrito">
-                <div class="row g-0">
-                    <div class="col-md-3">
-                        <img src="./assets/${elemento.producto.imagen}" class="img-fluid rounded-start" alt="${elemento.producto.nombre}">
-                    </div>
-                    <div class="col-md-6 cartaCarritoContainer">
-                        <div class="card-body cartaCarritoBody">
-                            <h5 class="card-title">${elemento.producto.nombre}</h5>
-                            <div class="cartaCarritoCantidad">
-                                <p class="card-text">$${estandarPrecio.format(precioConIva)}<small class="text-muted"></small></p>
-                                <div class="cantidad">
-                                    <div class="value-button" id="decrease ${elemento.producto.id}" value="Decrease Value">-</div>
-                                    <input type="number" class="inputCart" id="cantidad-producto-${elemento.producto.id}" value="${elemento.cantidad}" min="1" max="1000" step="1"/>
-                                    <div class="value-button" id="increase ${elemento.producto.id}" value="Increase Value">+</div>
+        console.log(carrito.length);
+        if(carrito.length != 0){
+            Swal.fire({
+                title: 'Carrito de compras',
+                customClass: "cart",
+                position: 'top-end',
+                html: " ",
+                footer:`<p id="total"></p><div class="botonesCart"><a href="" id="cleanCart">Vaciar el carrito</a><a href="" id="buy">Comprar</a></div>`,
+                showClass: {
+                  popup: `
+                    animate__animated
+                    animate__fadeInRight
+                    animate__faster
+                  `
+                },
+                hideClass: {
+                  popup: `
+                    animate__animated
+                    animate__fadeOutRight
+                    animate__faster
+                  `
+                },
+                background: '#BF9EEC',
+                showConfirmButton: false,
+                showCloseButton: true,
+                didOpen: () => {
+                    console.log(carrito);
+                    if(carrito.length == 0){
+                        console.log(carrito);
+                        Swal.update({
+                            footer:`<a href="allProducts.html" id="buy">Ver todos los productos</a>`,
+                        });
+                    }
+                }
+            });
+    
+            let cardCarrito = Swal.getHtmlContainer();
+                console.log(cardCarrito);
+                console.log(carrito);
+                cardCarrito.innerHTML = "";
+                carrito.forEach((elemento) => {
+                    let precioConIva = elemento.producto.precio * 1.21;
+                    let productoCart = document.createElement("div");
+                    productoCart.className = "productoCart";
+                    productoCart.innerHTML += `
+                    <div class="card mb-3 cartaCarrito">
+                        <div class="row g-0">
+                            <div class="col-3">
+                                <img src="./assets/${elemento.producto.imagen}" class="img-fluid rounded-start" alt="${elemento.producto.nombre}">
+                            </div>
+                            <div class="col-6 cartaCarritoContainer">
+                                <div class="card-body cartaCarritoBody">
+                                    <h5 class="card-title">${elemento.producto.nombre}</h5>
+                                    <div class="cartaCarritoCantidad">
+                                        <p class="card-text">$${estandarPrecio.format(precioConIva)}<small class="text-muted"></small></p>
+                                        <div class="cantidad">
+                                            <div class="value-button" id="decrease ${elemento.producto.id}" value="Decrease Value">-</div>
+                                            <input type="number" class="inputCart" id="cantidad-producto-${elemento.producto.id}" value="${elemento.cantidad}" min="1" max="1000" step="1"/>
+                                            <div class="value-button" id="increase ${elemento.producto.id}" value="Increase Value">+</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 cartaCarritoContainer">
+                                <div class="card-body cartaCarritoBody">
+                                    <a href="#" class="card-title basura" id="removeCart${elemento.producto.id}"><i class="fa-solid fa-trash-can"></i></a>
+                                    <p class="card-text" id="precio-producto-${elemento.producto.id}">$${estandarPrecio.format(precioConIva*elemento.cantidad)}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 cartaCarritoContainer">
-                        <div class="card-body cartaCarritoBody">
-                            <h5 class="card-title basura" id="removeCart${elemento.producto.id}"><i class="fa-solid fa-trash-can"></i></h5>
-                            <p class="card-text" id="precio-producto-${elemento.producto.id}">$${estandarPrecio.format(precioConIva*elemento.cantidad)}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `;
+                    `;
+        
+                    cardCarrito.append(productoCart);
+        
+                    total+=elemento.cantidad*precioConIva;
+        
+                    let cantidadProductos = document.getElementById(`cantidad-producto-${elemento.producto.id}`);
+        
+                    let precioTotalProducto = document.getElementById(`precio-producto-${elemento.producto.id}`);
+        
+                    let totalCompra = document.getElementById("total");
+        
+                    let value = parseInt(cantidadProductos.value);
+        
+                    function decreaseValue() { 
+                        value = isNaN(value) ? 1 : value;
+                        value < 2 ? value = 2 : '';
+                        value--;
+                        cantidadProductos.value = value;
+                        elemento.cantidad = parseInt(cantidadProductos.value);
+                        precioTotalProducto.innerHTML = `$${estandarPrecio.format(precioConIva*elemento.cantidad)}`;
+                        total -=precioConIva;
+                        console.log(total);
+                        totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`
+                        itemsCarrito(); 
+                    }
+        
+                    function increaseValue() {
+                        value = isNaN(value) ? 1 : value;
+                        value++;
+                        cantidadProductos.value = value;
+                        elemento.cantidad = parseInt(cantidadProductos.value);
+                        localStorage.setItem("carrito",JSON.stringify(carrito));
+                        precioTotalProducto.innerHTML = `$${estandarPrecio.format(precioConIva*elemento.cantidad)}`;
+                        total += precioConIva;
+                        console.log(total);
+                        totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`
+                        itemsCarrito(); 
+                    }
+        
+                    document.getElementById(`decrease ${elemento.producto.id}`).onclick=()=>decreaseValue(total);
+        
+                    document.getElementById(`increase ${elemento.producto.id}`).onclick=()=>increaseValue(total);
+        
+                    let borrarProducto = document.getElementById(`removeCart${elemento.producto.id}`);
+        
+                    borrarProducto.addEventListener("click", (e) => {
+                        eliminarProductoCarrito(elemento);
+                        productoCart.remove();
+                        total -=elemento.cantidad*precioConIva;
+                        totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`
+                        itemsCarrito(); 
+                    });
+        
+                    vaciarCarrito();
+        
+                    totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`  
+                    });
+        
+            setearCarrito();
+        } else {
+            Swal.fire({
+                title: 'Carrito de compras',
+                customClass: "cart",
+                position: 'top-end',
+                html: "No hay productos en el carrito!",
+                footer:`<a href="allProducts.html" id="buy">Ver todos los productos</a>`,
+                showClass: {
+                  popup: `
+                    animate__animated
+                    animate__fadeInRight
+                    animate__faster
+                  `
+                },
+                hideClass: {
+                  popup: `
+                    animate__animated
+                    animate__fadeOutRight
+                    animate__faster
+                  `
+                },
+                background: '#BF9EEC',
+                showConfirmButton: false,
+                showCloseButton: true,
+            })
+        }
 
-            cardCarrito.append(productoCart);
-
-            total+=elemento.cantidad*precioConIva;
-
-            let cantidadProductos = document.getElementById(`cantidad-producto-${elemento.producto.id}`);
-
-            let precioTotalProducto = document.getElementById(`precio-producto-${elemento.producto.id}`);
-
-            let totalCompra = document.getElementById("total");
-
-            let value = parseInt(cantidadProductos.value);
-
-            function decreaseValue() { 
-                value = isNaN(value) ? 1 : value;
-                value < 2 ? value = 2 : '';
-                value--;
-                cantidadProductos.value = value;
-                elemento.cantidad = parseInt(cantidadProductos.value);
-                precioTotalProducto.innerHTML = `$${estandarPrecio.format(precioConIva*elemento.cantidad)}`;
-                total -=precioConIva;
-                console.log(total);
-                totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`
-                itemsCarrito(); 
-            }
-
-            function increaseValue() {
-                value = isNaN(value) ? 1 : value;
-                value++;
-                cantidadProductos.value = value;
-                elemento.cantidad = parseInt(cantidadProductos.value);
-                localStorage.setItem("carrito",JSON.stringify(carrito));
-                precioTotalProducto.innerHTML = `$${estandarPrecio.format(precioConIva*elemento.cantidad)}`;
-                total += precioConIva;
-                console.log(total);
-                totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`
-                itemsCarrito(); 
-            }
-
-            document.getElementById(`decrease ${elemento.producto.id}`).onclick=()=>decreaseValue(total);
-
-            document.getElementById(`increase ${elemento.producto.id}`).onclick=()=>increaseValue(total);
-
-            let borrarProducto = document.getElementById(`removeCart${elemento.producto.id}`);
-
-            borrarProducto.addEventListener("click", (e) => {
-                eliminarProductoCarrito(elemento);
-                productoCart.remove();
-                itemsCarrito();
-            });
-
-            vaciarCarrito();
-
-            totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`  
-            });
-
-            localStorage.setItem("carrito",JSON.stringify(carrito));
-        });
+    });
 };
 
 function eliminarProductoCarrito(elementoAEliminar) {
     const elementosAMantener = carrito.filter((elemento) => elementoAEliminar.producto.id != elemento.producto.id);
     carrito.length = 0;
     elementosAMantener.forEach((elemento) => carrito.push(elemento));
+    setearCarrito();
 }
 
 function itemsCarrito(){
@@ -259,7 +273,7 @@ function itemsCarrito(){
     carrito.forEach((elemento) => {
         cantidad += parseInt(elemento.cantidad);
     });
-    console.log(cantidad);
+    // console.log(cantidad);
     let items = document.querySelector(".items");
     items.innerText = `${cantidad}`
 }
@@ -267,7 +281,7 @@ function itemsCarrito(){
 function vaciarCarrito(){
     document.getElementById("cleanCart").addEventListener("click", function(){
         carrito.length = 0;
-        localStorage.setItem("carrito",JSON.stringify(carrito));
+        setearCarrito();
     });
 }
 

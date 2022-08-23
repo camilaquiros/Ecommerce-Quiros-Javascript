@@ -8,19 +8,47 @@ header{
   position: sticky;
   top: 0;
   z-index: 3;
+
+  @media screen and(max-width:550px) {
+    display: grid;
+    grid-template-areas: 
+      "logo logo logo iconos iconos iconos iconos"
+      "logo logo logo menu menu menu menu";
+  }
 }
 
 .menu{
   width: 40vw;
-  @include flex(flex, wrap, null, space-between, center);
+  @include flex(flex, wrap, null, flex-start, center);
+  grid-area: menu;
 
   a {
     background-color: transparentize($blanco, 0.7);
-    font-size: 1.8vw;
+    font-size: 1.5em;
+    margin: 0 2%;
+
+    @media screen and(max-width:690px) {
+      font-size: 1em;
+    }
+
+    @media screen and(max-width:550px) {
+      font-size: 0.8em;
+    }
+  }
+
+  @media screen and(max-width:690px) {
+    width: 30vw;
+  }
+
+  @media screen and(max-width:550px) {
+    justify-content: flex-end;
+    justify-self: end;
+    width: 100%;
   }
 }
 
 #logo {
+  @include flex(flex, null, null, center, center);
   text-align: map-get($textos, textAlign);
   padding: 1%;
   border-style: dashed;
@@ -30,17 +58,25 @@ header{
   color: map-get($textos, color);
   font-family: $serif;
   font-weight: bolder;
-  font-size: 2.5vw;
+  font-size: 2em;
+  grid-area: logo;
+  height: 100%;
 
   &:hover {
     background: linear-gradient(120deg, $amarillo 12%, $rosado 34%, $violeta 68%, $turquesa 90%);
   }
+
+  @media screen and(max-width:550px) {
+    font-size: 1.5em;
+  }
 }
 
 .iconos {
-  @include flex(flex, wrap, null, space-between ,center);
+  @include flex(inline-flex, wrap, null, space-between ,center);
   align-self: flex-start;
-  width: 20vw;
+  justify-self: flex-end;
+  width: 25vw;
+  grid-area: iconos;
 
   input{
     border-radius: 5px;
@@ -54,8 +90,20 @@ header{
 
   i{
     color: $negro;
-    font-size: 2vw;
+    font-size: 1.8em;
     background-color: transparentize(white, 0.1);
+
+    @media screen and(max-width:850px) {
+      font-size: 1em;
+    }
+  }
+
+  @media screen and(max-width:850px) {
+    width: 30vw;
+  }
+
+  @media screen and(max-width:550px) {
+  width: 90%;
   }
 }
 
@@ -65,6 +113,14 @@ header{
 
   &::-webkit-scrollbar {
     width: 0;
+  }
+
+  @media screen and(max-width:850px) {
+    font-size: 0.8em;
+  }
+
+  @media screen and(max-width:550px) {
+    font-size: 0.6em;
   }
 }
 
@@ -131,6 +187,7 @@ header{
 
 #cartIcon{
   border: 0;
+  background-color: transparent;
 }
 
 .items{

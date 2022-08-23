@@ -15,7 +15,7 @@ body.swal2-shown > [aria-hidden="true"] {
     padding: 0.5% 1%;
     @extend %rosado;
     color: $amarillo;
-    font-size: 1.5vw;
+    font-size: 0.7em;
     font-weight: bold;
     border-radius: 10px;
     display: block;
@@ -35,7 +35,7 @@ body.swal2-shown > [aria-hidden="true"] {
         right: 0;
         z-index: -1;
         background-color: $turquesa;
-        border-radius: 10px;
+        border-radius: 5px;
         transition: all 0.3s ease;
       }
     
@@ -49,12 +49,16 @@ body.swal2-shown > [aria-hidden="true"] {
     @include flex(flex, wrap, null, space-between, null);
     width: 90%;
     margin: 2% 0;
+
+    @media screen and(max-width:850px) {
+        justify-content: space-around;
+      }
 }
 
 .producto {
     width: 20%;
     @include flex(flex, null, column, center, center);
-    margin: 1%;
+    margin: 2%;
     border: dashed $amarillo;
     padding: 0.5%;
     border-radius: 15px;
@@ -68,7 +72,7 @@ body.swal2-shown > [aria-hidden="true"] {
         padding: 1% 0;
         margin: 0;
         width: 100%;
-        font-size: 1.3vw;
+        font-size: 1.2vw;
         text-align: center;
         background-color: $turquesa;
         color: $amarillo;
@@ -76,6 +80,10 @@ body.swal2-shown > [aria-hidden="true"] {
         &:nth-child(2) {
             font-weight: bolder;
         }
+
+        @media screen and(max-width:850px) {
+            font-size: 0.8em;
+          }
     }
 
     button {
@@ -86,6 +94,18 @@ body.swal2-shown > [aria-hidden="true"] {
         color: $amarillo;
         padding: 2% 5%;
         font-size: 1.2vw;
+
+        @media screen and(max-width:850px) {
+            font-size: 0.8em;
+          }
+    }
+
+    @media screen and(max-width:850px) {
+        width: 25%;
+    }
+
+    @media screen and(max-width:550px) {
+        width: 40%;
     }
 }
 
@@ -125,6 +145,10 @@ body.swal2-shown > [aria-hidden="true"] {
     &:hover {
         transform: scale(1.05, 1.05);
         transition: all 0.5s;
+    }
+
+    @media screen and(max-width:550px) {
+        width: 100%;
       }
 }
 
