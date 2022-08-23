@@ -220,6 +220,15 @@ function imprimirCarrito(){
                     borrarProducto.addEventListener("click", (e) => {
                         eliminarProductoCarrito(elemento);
                         productoCart.remove();
+                        Toastify({
+                            text: `${elemento.producto.nombre} eliminado del carrito de compra`,
+                            duration: 1500,
+                            position: 'center',
+                            className: "toastPersonalizado",
+                            style: {
+                                background: "#F2FF8D",
+                            }
+                        }).showToast();
                         total -=elemento.cantidad*precioConIva;
                         totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`
                         itemsCarrito(); 
