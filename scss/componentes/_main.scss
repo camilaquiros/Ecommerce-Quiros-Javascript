@@ -161,3 +161,49 @@ body.swal2-shown > [aria-hidden="true"] {
     border-radius: 15px;
     border: dashed $negro;
 }
+
+.divSelects {
+    @include flex(flex, wrap, row, space-between, center);
+    margin-top: 3%;
+    width: 88%;
+
+    @media screen and(max-width:850px) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+}
+
+.divFiltro, .divOrdenar {
+    @include flex(flex, wrap, row, flex-start, center);
+    padding: 1%;
+    width: 50%;
+    p {
+        width: fit-content;
+        margin: 0;
+        font-weight: bold;
+        color: $amarillo;
+        padding-right: 2%;
+        display: inline-block;
+    }
+
+    select {
+        color: $amarillo;
+        background-color: $rosado;
+        text-align: center;
+        padding: 2% 1%;
+        box-shadow: 0 2px 2px $negro;
+        border-color: $rosado;
+    }
+
+    @media screen and(max-width:850px) {
+       width: 100%; 
+    }
+}
+
+.divOrdenar{
+    justify-content: flex-end;
+
+    @media screen and(max-width:850px) {
+        justify-content: flex-start;
+    }
+}

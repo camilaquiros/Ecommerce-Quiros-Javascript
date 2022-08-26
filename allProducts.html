@@ -42,6 +42,30 @@
         </div>
     </header>
     <main>
+        <div class="divSelects">
+            <div class="divFiltro">
+                <p>Filtrar por categoria:</p>
+                <div class="filtro">
+                    <select name="categorias" id="filtro">
+                        <option value="todos">Todos los productos</option>
+                    </select>
+                    <span class="arrow"></span>
+                </div>
+            </div>
+            <div class="divOrdenar">
+                <p>Ordenar por: </p>
+                <div class="ordenar">
+                    <select name="sort" id="ordenar">
+                        <option disabled selected value> --Seleccionar--</option>
+                        <option value="precio-ascendente">Precio: Menor a mayor</option>
+                        <option value="precio-descendente">Precio: Mayor a menor</option>
+                        <option value="nombre-ascendente">Nombre: A-Z</option>
+                        <option value="nombre-descendente">Nombre: Z-A</option>
+                    </select>
+                    <span class="arrow"></span>
+                </div>
+            </div>
+        </div>
         <div id="productos"></div>
     </main>
     <footer>

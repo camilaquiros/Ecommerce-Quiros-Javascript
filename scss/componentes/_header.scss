@@ -9,6 +9,10 @@ header{
   top: 0;
   z-index: 3;
 
+  @media screen and(max-width:850px) {
+    padding: 2% 3%;
+  }
+
   @media screen and(max-width:550px) {
     display: grid;
     grid-template-areas: 
@@ -24,19 +28,19 @@ header{
 
   a {
     background-color: transparentize($blanco, 0.7);
-    font-size: 1.5em;
+    font-size: 1.8em;
     margin: 0 2%;
 
-    @media screen and(max-width:690px) {
+    @media screen and(max-width:850px) {
       font-size: 1em;
     }
 
     @media screen and(max-width:550px) {
-      font-size: 0.8em;
+      font-size: 1.2em;
     }
   }
 
-  @media screen and(max-width:690px) {
+  @media screen and(max-width:850px) {
     width: 30vw;
   }
 
@@ -94,7 +98,7 @@ header{
     background-color: transparentize(white, 0.1);
 
     @media screen and(max-width:850px) {
-      font-size: 1em;
+      font-size: 1.5em;
     }
   }
 
@@ -194,6 +198,10 @@ header{
   background-color: $rosado;
   color: $amarillo;
   font-weight: bold;
-  font-size: 0.9vw;
+  font-size: 0.7em;
   font-family: $serif;
+
+  @media screen and(max-width:550px) {
+    font-size: 0.5em;
+  }
 }

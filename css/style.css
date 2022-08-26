@@ -63,6 +63,9 @@ header {
   position: sticky;
   top: 0;
   z-index: 3; }
+  @media screen and (max-width: 850px) {
+    header {
+      padding: 2% 3%; } }
   @media screen and (max-width: 550px) {
     header {
       display: grid;
@@ -77,15 +80,15 @@ header {
   grid-area: menu; }
   .menu a {
     background-color: rgba(238, 238, 234, 0.3);
-    font-size: 1.5em;
+    font-size: 1.8em;
     margin: 0 2%; }
-    @media screen and (max-width: 690px) {
+    @media screen and (max-width: 850px) {
       .menu a {
         font-size: 1em; } }
     @media screen and (max-width: 550px) {
       .menu a {
-        font-size: 0.8em; } }
-  @media screen and (max-width: 690px) {
+        font-size: 1.2em; } }
+  @media screen and (max-width: 850px) {
     .menu {
       width: 30vw; } }
   @media screen and (max-width: 550px) {
@@ -137,7 +140,7 @@ header {
     background-color: rgba(255, 255, 255, 0.9); }
     @media screen and (max-width: 850px) {
       .iconos i {
-        font-size: 1em; } }
+        font-size: 1.5em; } }
   @media screen and (max-width: 850px) {
     .iconos {
       width: 30vw; } }
@@ -216,8 +219,11 @@ header {
   background-color: #FF99C1;
   color: #F2FF8D;
   font-weight: bold;
-  font-size: 0.9vw;
+  font-size: 0.7em;
   font-family: "Inconsolata", monospace; }
+  @media screen and (max-width: 550px) {
+    .items {
+      font-size: 0.5em; } }
 
 main {
   background-color: #BF9EEC;
@@ -358,6 +364,51 @@ body.swal2-shown > [aria-hidden="true"] {
   text-align: center;
   border-radius: 15px;
   border: dashed #393838; }
+
+.divSelects {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3%;
+  width: 88%; }
+  @media screen and (max-width: 850px) {
+    .divSelects {
+      flex-direction: column;
+      align-items: flex-start; } }
+
+.divFiltro, .divOrdenar {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1%;
+  width: 50%; }
+  .divFiltro p, .divOrdenar p {
+    width: fit-content;
+    margin: 0;
+    font-weight: bold;
+    color: #F2FF8D;
+    padding-right: 2%;
+    display: inline-block; }
+  .divFiltro select, .divOrdenar select {
+    color: #F2FF8D;
+    background-color: #FF99C1;
+    text-align: center;
+    padding: 2% 1%;
+    box-shadow: 0 2px 2px #393838;
+    border-color: #FF99C1; }
+  @media screen and (max-width: 850px) {
+    .divFiltro, .divOrdenar {
+      width: 100%; } }
+
+.divOrdenar {
+  justify-content: flex-end; }
+  @media screen and (max-width: 850px) {
+    .divOrdenar {
+      justify-content: flex-start; } }
 
 /* FOOTER */
 footer {

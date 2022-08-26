@@ -3,38 +3,28 @@ let botonTodosLosProductos = document.getElementById("allProducts");
 let caratulas=document.getElementById("categorias");
 let divLista = document.getElementById("divLista");
 let total = 0;
+let filtrado = productos;
 
-
+//FUNCIONES QUE DEBEN FUNCIONAR EN TODO EL SITIO, PARA LLAMADA DE FUNCIONES EN PAGINAS ESPECIFICAS HAY OTROS JS CON EL NOMBRE CORRESPONDIENTE A SU HTML
 traerCarrito();
 itemsCarrito();
 buscador();
 imprimirCarrito();
 
 
+//GUARDAR CARRITO EN STORAGE
 function setearCarrito(){
     localStorage.setItem("carrito",JSON.stringify(carrito));
 }
 
-// cargar los elementos del carro abandonado a la tabla
+//CARGAR CARRITO DESDE EL STORAGE
 function traerCarrito(){
         carrito=JSON.parse(localStorage.getItem("carrito")) || [];
 }
 
-function imprimirCategorias(){
-    for(const categoria of categorias){
-        let caratula=document.createElement("div");
-        caratula.className="categoria";
-        caratula.innerHTML=`
-            <a href="">
-            <img src="./assets/${categoria.caratula}" alt="${categoria.titulo}">
-            <p>${categoria.titulo}</p>
-            </a>
-        `;
-        caratulas.append(caratula);
-    }
-}
-
+//MOSTRAR TARJETAS DE PRODUCTOS
 function imprimirProductos(){
+    cardProducto.innerHTML = "";
     for (const producto of productos) {
         let precioConIva = producto.precio * 1.21;
         cardProducto.innerHTML += `
@@ -49,22 +39,9 @@ function imprimirProductos(){
     } 
 }
 
-function botonMostrarTodos(){
-    botonTodosLosProductos.onclick = () => {
-        if(botonTodosLosProductos.innerText == "Mostrar todos los productos"){
-            imprimirProductos();
-            botonTodosLosProductos.innerText = "Ocultar todos los productos";
-            botonAgregarCarrito();
-            } else {
-                cardProducto.innerHTML = "";
-                botonTodosLosProductos.innerText = "Mostrar todos los productos";
-        }
-    }
-}
-
-//evento individual para cada boton
+//BOTÓN PARA AGREGAR AL CARRITO, TOMA EN CUENTA SI HAY STOCK SEGÚN EL PARÁMETRO CANTIDAD DEL OBJETO PRODUCTO
 function botonAgregarCarrito(){
-    productos.forEach(producto =>{
+    filtrado.forEach(producto =>{
         document.getElementById(`addCart${producto.id}`).addEventListener("click",function(){
             let cantidad = producto.cantidad;
             cantidad > 0? agregarAlCarrito(producto):alert("No hay stock");
@@ -73,16 +50,16 @@ function botonAgregarCarrito(){
     });
 }
 
+//FUNCIÓN PARA AGREGAR AL CARRITO, SI EL PRODUCTO YA SE ENCUENTRA EN EL CARRITO SE SUMA UNA UNIDAD AL PRODUCTO EN VEZ DE DUPLICARSE
 function agregarAlCarrito(producto){
     let elementoExistente = carrito.find((elemento) => elemento.producto.id == producto.id);
-
     if(elementoExistente) {
         elementoExistente.cantidad+=1;
     } else {
         let productoNuevo = new Carrito(producto, 1);
         carrito.push(productoNuevo);
     }
-
+    // https://github.com/apvarun/toastify-js/blob/master/README.md
     Toastify({
         text: `${producto.nombre} agregado al carrito de compra`,
         duration: 1500,
@@ -92,16 +69,17 @@ function agregarAlCarrito(producto){
             background: "#F2FF8D",
         }
     }).showToast();
-
     setearCarrito();
 }
 
-
+//IMPRESIÓN DEL CARRITO, DISPONIBLE EN TODO EL SITIO COMO UN SWAL, CLICKEANDO EN EL ICONO DEL CARRITO
 function imprimirCarrito(){
     let cartIcon = document.getElementById("cartIcon");
     cartIcon.addEventListener("click", (e) => {
-        console.log(carrito.length);
+        //SI EL CARRITO NO ESTA VACÍO SE IMPRIME TODO DENTRO DEL IF
         if(carrito.length != 0){
+            // https://sweetalert2.github.io/recipe-gallery/sidebars-drawers.html
+            // https://sweetalert2.github.io/recipe-gallery/blurred-backdrop.html
             Swal.fire({
                 title: 'Carrito de compras',
                 customClass: "cart",
@@ -135,10 +113,9 @@ function imprimirCarrito(){
                     }
                 }
             });
-    
+            //DEBIDO A LA COMPLEJIDAD DEL HTML CONSIDERE MEJOR TRATARLO COMO UN MÉTODO DE SWAL Y NO ENCERRARLO DENTRO DEL MISMO
+            // https://sweetalert2.github.io/#methods
             let cardCarrito = Swal.getHtmlContainer();
-                console.log(cardCarrito);
-                console.log(carrito);
                 cardCarrito.innerHTML = "";
                 carrito.forEach((elemento) => {
                     let precioConIva = elemento.producto.precio * 1.21;
@@ -184,7 +161,9 @@ function imprimirCarrito(){
                     let totalCompra = document.getElementById("total");
         
                     let value = parseInt(cantidadProductos.value);
-        
+                    
+                    //INPUT HECHO A PARTIR DE UN CODEPEN PARA MOSTRAR SÍMBOLOS + Y - EN LA OPCIÓN DE CANTIDAD
+                    // https://codepen.io/mtbroomell/pen/yNwwdv
                     function decreaseValue() { 
                         value = isNaN(value) ? 1 : value;
                         value < 2 ? value = 2 : '';
@@ -216,10 +195,12 @@ function imprimirCarrito(){
                     document.getElementById(`increase ${elemento.producto.id}`).onclick=()=>increaseValue(total);
         
                     let borrarProducto = document.getElementById(`removeCart${elemento.producto.id}`);
-        
+                    
+                    //ELIMINAR UN SOLO PRODUCTO
                     borrarProducto.addEventListener("click", (e) => {
                         eliminarProductoCarrito(elemento);
                         productoCart.remove();
+                        // https://github.com/apvarun/toastify-js/blob/master/README.md
                         Toastify({
                             text: `${elemento.producto.nombre} eliminado del carrito de compra`,
                             duration: 1500,
@@ -235,11 +216,12 @@ function imprimirCarrito(){
                     });
         
                     vaciarCarrito();
-        
+                    
+                    //TOTAL DE COMPRA
                     totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`  
-                    });
-        
+                });
             setearCarrito();
+        //SI EL CARRITO ESTA VACÍO SE IMPRIME EL ELSE    
         } else {
             Swal.fire({
                 title: 'Carrito de compras',
@@ -264,12 +246,12 @@ function imprimirCarrito(){
                 background: '#BF9EEC',
                 showConfirmButton: false,
                 showCloseButton: true,
-            })
-        }
-
+            });
+        };
     });
 };
 
+//FUNCIÓN PARA ELIMINAR UN SOLO PRODUCTO DEL CARRITO
 function eliminarProductoCarrito(elementoAEliminar) {
     const elementosAMantener = carrito.filter((elemento) => elementoAEliminar.producto.id != elemento.producto.id);
     carrito.length = 0;
@@ -277,6 +259,7 @@ function eliminarProductoCarrito(elementoAEliminar) {
     setearCarrito();
 }
 
+//BADGE DEL CARRITO CON EL NUMERO DE ITEMS, SE ACTUALIZA CUANDO SE AGREGA UN PRODUCTO, SE ELIMINA UN PRODUCTO O SE CAMBIA LA CANTIDAD DE ALGÚN PRODUCTO
 function itemsCarrito(){
     let cantidad = 0;
     carrito.forEach((elemento) => {
@@ -287,6 +270,8 @@ function itemsCarrito(){
     items.innerText = `${cantidad}`
 }
 
+
+//FUNCIÓN PARA ELIMINAR TODO EL CARRITO
 function vaciarCarrito(){
     document.getElementById("cleanCart").addEventListener("click", function(){
         carrito.length = 0;
@@ -294,6 +279,8 @@ function vaciarCarrito(){
     });
 }
 
+//BARRA DE BUSCADOR, CUANDO SE TIPEAN DOS LETRAS SE DESPLIEGA UNA LISTA DE COINCIDENCIAS DENTRO DE LOS PRODUCTOS
+// https://www.w3schools.com/howto/howto_js_autocomplete.asp
 function buscador(){
     buscar = document.getElementById("buscador");
     divBuscador = document.getElementById("divBuscador");
@@ -336,9 +323,7 @@ function buscador(){
             divLista.style.border = "dashed #393838";
             buscador();
         }
-
     });
-
 };
 
 
