@@ -188,11 +188,12 @@ body.swal2-shown > [aria-hidden="true"] {
 
     select {
         color: $amarillo;
-        background-color: $rosado;
+        background-color: $turquesa;
         text-align: center;
         padding: 2% 1%;
         box-shadow: 0 2px 2px $negro;
-        border-color: $rosado;
+        border-color: $turquesa;
+        font-weight: bold;
     }
 
     @media screen and(max-width:850px) {

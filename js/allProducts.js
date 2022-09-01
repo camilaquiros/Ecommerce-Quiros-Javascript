@@ -1,13 +1,14 @@
-imprimirFiltrado();
+JSONImprimirProductos();
 botonAgregarCarrito();
-filtrarPorCategoria();
+JSONFiltrarPorCategorias();
 ordenarPor();
 
 //IMPRESIÓN DE TARJETAS DE FILTRADO PARA FILTER Y SORT
 function imprimirFiltrado() {
     cardProducto.innerHTML = "";
     for (const producto of filtrado) {
-        let precioConIva = producto.precio * 1.21;
+        let pesificar = producto.precio*dolarBlueVenta;
+        let precioConIva = pesificar * 1.21;
         cardProducto.innerHTML += `
             <div class="producto">
                 <img src="./assets/${producto.imagen}" alt="${producto.imagen}">
@@ -20,6 +21,14 @@ function imprimirFiltrado() {
     };
 }
 
+async function JSONImprimirFiltrado() {
+    const URLJSON = "./products.json"
+    const respuesta = await fetch(URLJSON)
+    const data = await respuesta.json()
+    filtrado = data;
+    imprimirFiltrado();
+}
+
 //FILTRADO DE PRODUCTOS POR CATEGORIA
 function filtrarPorCategoria(){
     let selectCategoria = document.getElementById("filtro");
@@ -29,7 +38,7 @@ function filtrarPorCategoria(){
         //SEGÚN LA SELECCIÓN DEL USUARIO SE IMPRIMEN LAS TARJETAS DE LOS PRODUCTOS SOLO PERTENECIENTES A LA CATEGORIA CORRESPONDIENTE
         selectCategoria.onchange = () => {
             if(selectCategoria.value == "todos"){
-                imprimirProductos();
+                JSONImprimirProductos();
             } else {
                 filtrado = productos.filter((producto) => producto.categoria == selectCategoria.value);
                 imprimirFiltrado();
@@ -38,6 +47,18 @@ function filtrarPorCategoria(){
         };
     };
 };
+
+async function JSONFiltrarPorCategorias(){
+    const URLJSONCategorias = "./categories.json";
+    const URLJSONProductos = "./products.json";
+    const respuestaCategorias = await fetch(URLJSONCategorias);
+    const respuestaProductos = await fetch(URLJSONProductos);
+    const dataCategorias = await respuestaCategorias.json();
+    const dataProductos = await respuestaProductos.json();
+    categorias = dataCategorias;
+    productos = dataProductos;
+    filtrarPorCategoria()
+}
 
 // https://www.codegrepper.com/code-examples/javascript/sort+the+products+by+their+price+using+js
 // ORDENADO DE PRODUCTOS SEGÚN PRECIO Y NOMBRE, BASADO EN LA SELECCIÓN DEL USUARIO

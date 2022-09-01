@@ -1,0 +1,217 @@
+[{
+    "id": 1,
+    "nombre": "Base Dior",
+    "categoria": "Bases",
+    "precio": 54,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "bases/DiorForever.jpg",
+    "cantidad": 10
+},
+{
+    "id": 2,
+    "nombre": "Base Anastasia",
+    "categoria": "Bases",
+    "precio": 38,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "bases/Anastasia.jpg",
+    "cantidad": 10
+},
+{
+    "id": 3,
+    "nombre": "Base Elf",
+    "categoria": "Bases",
+    "precio": 6,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "bases/Elf.jpg",
+    "cantidad": 10
+},
+{
+    "id": 4,
+    "nombre": "Base Fenty",
+    "categoria": "Bases",
+    "precio": 39,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "bases/Fenty.jpg",
+    "cantidad": 10
+},
+{
+    "id": 5,
+    "nombre": "Labial CT",
+    "categoria": "Labiales",
+    "precio": 34,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "labiales/CharlotteTilbury.jpg",
+    "cantidad": 10
+},
+{
+    "id": 6,
+    "nombre": "Labial Fenty",
+    "categoria": "Labiales",
+    "precio": 26,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "labiales/Fenty.jpg",
+    "cantidad": 10
+},
+{
+    "id": 7,
+    "nombre": "Labial HausLabs",
+    "categoria": "Labiales",
+    "precio": 24,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "labiales/HausLabs.jpg",
+    "cantidad": 10
+},
+{
+    "id": 8,
+    "nombre": "Labial PatMcGrath",
+    "categoria": "Labiales",
+    "precio": 39,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "labiales/PatMcGrath.jpg",
+    "cantidad": 10
+},
+{
+    "id": 9,
+    "nombre": "Mascara Benefit",
+    "categoria": "Mascaras",
+    "precio": 27,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "mascaras/Benefit.jpg",
+    "cantidad": 10
+},
+{
+    "id": 10,
+    "nombre": "Mascara Hourglass",
+    "categoria": "Mascaras",
+    "precio": 29,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "mascaras/Hourglass.jpg",
+    "cantidad": 10
+},
+{
+    "id": 11,
+    "nombre": "Mascara Lancome",
+    "categoria": "Mascaras",
+    "precio": 32,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "mascaras/Lancome.jpg",
+    "cantidad": 10
+},
+{
+    "id": 12,
+    "nombre": "Mascara Maybelline",
+    "categoria": "Mascaras",
+    "precio": 12.99,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "mascaras/MaybellineSkyHigh.jpg",
+    "cantidad": 10
+},
+{
+    "id": 13,
+    "nombre": "Paleta Anastasia",
+    "categoria": "Paletas",
+    "precio": 45,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "paletas/Anastasia.jpg",
+    "cantidad": 10
+},
+{
+    "id": 14,
+    "nombre": "Paleta Colourpop",
+    "categoria": "Paletas",
+    "precio": 34,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "paletas/ColourpopBareNecessities.jpg",
+    "cantidad": 10
+},
+{
+    "id": 15,
+    "nombre": "Paleta ND",
+    "categoria": "Paletas",
+    "precio": 65,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "paletas/NatashaDenonaPastel.jpg",
+    "cantidad": 10
+},
+{
+    "id": 16,
+    "nombre": "Paleta Pat McGrath",
+    "categoria": "Paletas",
+    "precio": 128,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "paletas/PatMagrath.jpg",
+    "cantidad": 10
+},
+{
+    "id": 17,
+    "nombre": "Brocha Fenty",
+    "categoria": "Brochas",
+    "precio": 36,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "brochas/Fenty.jpg",
+    "cantidad": 10
+},
+{
+    "id": 18,
+    "nombre": "Brochas Morphe",
+    "categoria": "Brochas",
+    "precio": 38,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "brochas/MorpheJaclyn.jpg",
+    "cantidad": 10
+},
+{
+    "id": 19,
+    "nombre": "Brochas RT",
+    "categoria": "Brochas",
+    "precio": 19.99,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "brochas/RealTechniques.jpg",
+    "cantidad": 10
+},
+{
+    "id": 20,
+    "nombre": "Brochas Sigma",
+    "categoria": "Brochas",
+    "precio": 73,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "brochas/Sigma.jpg",
+    "cantidad": 10
+},
+{
+    "id": 21,
+    "nombre": "Esmalte ILNP",
+    "categoria": "Esmaltes",
+    "precio": 10,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "esmaltes/ILNP.jpg",
+    "cantidad": 10
+},
+{
+    "id": 22,
+    "nombre": "Esmalte ILNP",
+    "categoria": "Esmaltes",
+    "precio": 10,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "esmaltes/ILNPHiFi.jpg",
+    "cantidad": 10
+},
+{
+    "id": 23,
+    "nombre": "Esmalte ILNP",
+    "categoria": "Esmaltes",
+    "precio": 10,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "esmaltes/ILNPMulticolored.jpg",
+    "cantidad": 10
+},
+{
+    "id": 24,
+    "nombre": "Esmalte ILNP",
+    "categoria": "Esmaltes",
+    "precio": 10,
+    "descripcion": "Lorem Ipsum",
+    "imagen": "esmaltes/ILNPRadiant.jpg",
+    "cantidad": 10
+}
+]

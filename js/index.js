@@ -1,5 +1,5 @@
-imprimirCategorias();
 botonMostrarTodos();
+JSONImprimirCategorias();
 
 //MOSTRAR TARJETAS DE CATEGORIAS EN EL INDEX
 function imprimirCategorias(){
@@ -16,11 +16,19 @@ function imprimirCategorias(){
     }
 }
 
+async function JSONImprimirCategorias(){
+    const URLJSON = "./categories.json";
+    const respuesta = await fetch(URLJSON);
+    const data = await respuesta.json();
+    categorias = data;
+    imprimirCategorias();
+}
+
 //BOTÓN UBICADO EN EL INDEX PARA MOSTRAR TODOS LOS PRODUCTOS
 function botonMostrarTodos(){
     botonTodosLosProductos.onclick = () => {
         if(botonTodosLosProductos.innerText == "Mostrar todos los productos"){
-            imprimirProductos();
+            JSONImprimirProductos();
             botonAgregarCarrito();
             botonTodosLosProductos.innerText = "Ocultar todos los productos";
             } else {

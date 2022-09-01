@@ -1,16 +1,21 @@
+let productos = [];
+let carrito = [];
+let categorias = [];
+const estandarPrecio = Intl.NumberFormat('es-ES', {minimumFractionDigits: 2});
 let cardProducto = document.getElementById("productos");
 let botonTodosLosProductos = document.getElementById("allProducts");
 let caratulas=document.getElementById("categorias");
 let divLista = document.getElementById("divLista");
 let total = 0;
 let filtrado = productos;
+let dolarBlueVenta;
 
-//FUNCIONES QUE DEBEN FUNCIONAR EN TODO EL SITIO, PARA LLAMADA DE FUNCIONES EN PAGINAS ESPECIFICAS HAY OTROS JS CON EL NOMBRE CORRESPONDIENTE A SU HTML
+//FUNCIONES QUE DEBEN FUNCIONAR EN TODO EL SITIO, PARA DESARROLLO Y LLAMADA DE FUNCIONES EN PAGINAS ESPECIFICAS HAY OTROS JS CON EL NOMBRE CORRESPONDIENTE A SU HTML
 traerCarrito();
 itemsCarrito();
 buscador();
 imprimirCarrito();
-
+obtenerValorDolar();
 
 //GUARDAR CARRITO EN STORAGE
 function setearCarrito(){
@@ -22,11 +27,21 @@ function traerCarrito(){
         carrito=JSON.parse(localStorage.getItem("carrito")) || [];
 }
 
+//FUNCIÓN PARA OBTENER EL VALOR DEL DÓLAR BLUE EN TIEMPO REAL
+async function obtenerValorDolar() {
+    const URLDOLAR = "https://api-dolar-argentina.herokuapp.com/api/dolarblue";
+    const respuesta = await fetch(URLDOLAR)
+    const data = await respuesta.json();
+    dolarBlueVenta = data.venta;
+    imprimirProductos();
+}
+
 //MOSTRAR TARJETAS DE PRODUCTOS
 function imprimirProductos(){
     cardProducto.innerHTML = "";
     for (const producto of productos) {
-        let precioConIva = producto.precio * 1.21;
+        let pesificar = producto.precio*dolarBlueVenta;
+        let precioConIva = pesificar * 1.21;
         cardProducto.innerHTML += `
             <div class="producto">
                 <img src="./assets/${producto.imagen}" alt="${producto.imagen}">
@@ -37,6 +52,14 @@ function imprimirProductos(){
             </div>
         `;
     } 
+}
+
+async function JSONImprimirProductos() {
+    const URLJSON = "./products.json"
+    const respuesta = await fetch(URLJSON)
+    const data = await respuesta.json()
+    productos = data;
+    imprimirProductos();
 }
 
 //BOTÓN PARA AGREGAR AL CARRITO, TOMA EN CUENTA SI HAY STOCK SEGÚN EL PARÁMETRO CANTIDAD DEL OBJETO PRODUCTO
@@ -279,7 +302,7 @@ function vaciarCarrito(){
     });
 }
 
-//BARRA DE BUSCADOR, CUANDO SE TIPEAN DOS LETRAS SE DESPLIEGA UNA LISTA DE COINCIDENCIAS DENTRO DE LOS PRODUCTOS
+//BARRA DE BUSCADOR, A PARTIR DEL TIPEO DE LETRAS SE DESPLIEGA UNA LISTA DE COINCIDENCIAS DENTRO DE LOS PRODUCTOS
 // https://www.w3schools.com/howto/howto_js_autocomplete.asp
 function buscador(){
     buscar = document.getElementById("buscador");
