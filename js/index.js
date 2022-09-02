@@ -29,7 +29,6 @@ function botonMostrarTodos(){
     botonTodosLosProductos.onclick = () => {
         if(botonTodosLosProductos.innerText == "Mostrar todos los productos"){
             JSONImprimirProductos();
-            botonAgregarCarrito();
             botonTodosLosProductos.innerText = "Ocultar todos los productos";
             } else {
                 cardProducto.innerHTML = "";

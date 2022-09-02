@@ -1,33 +1,6 @@
 JSONImprimirProductos();
-botonAgregarCarrito();
 JSONFiltrarPorCategorias();
 ordenarPor();
-
-//IMPRESIÓN DE TARJETAS DE FILTRADO PARA FILTER Y SORT
-function imprimirFiltrado() {
-    cardProducto.innerHTML = "";
-    for (const producto of filtrado) {
-        let pesificar = producto.precio*dolarBlueVenta;
-        let precioConIva = pesificar * 1.21;
-        cardProducto.innerHTML += `
-            <div class="producto">
-                <img src="./assets/${producto.imagen}" alt="${producto.imagen}">
-                <p>${producto.nombre}</p>
-                <p>$${estandarPrecio.format(precioConIva)}</p>
-                <p>Disponibles: ${producto.cantidad}</p>
-                <button id="addCart${producto.id}">AGREGAR AL CARRITO</button>
-            </div>
-        `;
-    };
-}
-
-async function JSONImprimirFiltrado() {
-    const URLJSON = "./products.json"
-    const respuesta = await fetch(URLJSON)
-    const data = await respuesta.json()
-    filtrado = data;
-    imprimirFiltrado();
-}
 
 //FILTRADO DE PRODUCTOS POR CATEGORIA
 function filtrarPorCategoria(){
@@ -40,13 +13,21 @@ function filtrarPorCategoria(){
             if(selectCategoria.value == "todos"){
                 JSONImprimirProductos();
             } else {
-                filtrado = productos.filter((producto) => producto.categoria == selectCategoria.value);
-                imprimirFiltrado();
-                botonAgregarCarrito();
+                JSONProductos();
+                productos = productos.filter((producto) => producto.categoria == selectCategoria.value);
+                console.log(productos);
+                imprimirProductos();
             }
         };
     };
 };
+
+async function JSONProductos(){
+    const URLJSON = "./products.json"
+    const respuesta = await fetch(URLJSON)
+    const data = await respuesta.json()
+    productos = data;
+}
 
 async function JSONFiltrarPorCategorias(){
     const URLJSONCategorias = "./categories.json";
@@ -57,7 +38,7 @@ async function JSONFiltrarPorCategorias(){
     const dataProductos = await respuestaProductos.json();
     categorias = dataCategorias;
     productos = dataProductos;
-    filtrarPorCategoria()
+    filtrarPorCategoria();
 }
 
 // https://www.codegrepper.com/code-examples/javascript/sort+the+products+by+their+price+using+js
@@ -67,20 +48,20 @@ function ordenarPor(){
     selectOrdenar.onchange = () => {
         switch(selectOrdenar.value){
             case "precio-ascendente":
-                filtrado.sort((a,b) => a.precio > b.precio ? 1:-1);
-                imprimirFiltrado();
+                productos.sort((a,b) => a.precio > b.precio ? 1:-1);
+                imprimirProductos();
                 break;
             case "precio-descendente":
-                filtrado.sort((a,b) => a.precio > b.precio ? -1:1);
-                imprimirFiltrado();
+                productos.sort((a,b) => a.precio > b.precio ? -1:1);
+                imprimirProductos();
                 break;
             case "nombre-ascendente":
-                filtrado.sort((a,b) => a.nombre > b.nombre ? 1:-1);
-                imprimirFiltrado();
+                productos.sort((a,b) => a.nombre > b.nombre ? 1:-1);
+                imprimirProductos();
                 break;
             case "nombre-descendente":
-                filtrado.sort((a,b) => a.nombre > b.nombre ? -1:1);
-                imprimirFiltrado();
+                productos.sort((a,b) => a.nombre > b.nombre ? -1:1);
+                imprimirProductos();
                 break;
         }
     }

@@ -10,6 +10,13 @@ let total = 0;
 let filtrado = productos;
 let dolarBlueVenta;
 
+class Carrito {
+    constructor(producto, cantidad) {
+        this.producto = producto;
+        this.cantidad = cantidad;
+    }
+}
+
 //FUNCIONES QUE DEBEN FUNCIONAR EN TODO EL SITIO, PARA DESARROLLO Y LLAMADA DE FUNCIONES EN PAGINAS ESPECIFICAS HAY OTROS JS CON EL NOMBRE CORRESPONDIENTE A SU HTML
 traerCarrito();
 itemsCarrito();
@@ -51,7 +58,16 @@ function imprimirProductos(){
                 <button id="addCart${producto.id}">AGREGAR AL CARRITO</button>
             </div>
         `;
-    } 
+    }
+
+    productos.forEach(producto =>{
+        document.getElementById(`addCart${producto.id}`).onclick = function(){
+            // let cantidad = producto.cantidad;
+            // cantidad > 0? agregarAlCarrito(producto):alert("No hay stock");
+            // itemsCarrito();
+            agregarAlCarrito(producto);
+        };
+    });
 }
 
 async function JSONImprimirProductos() {
@@ -62,29 +78,21 @@ async function JSONImprimirProductos() {
     imprimirProductos();
 }
 
-//BOTÓN PARA AGREGAR AL CARRITO, TOMA EN CUENTA SI HAY STOCK SEGÚN EL PARÁMETRO CANTIDAD DEL OBJETO PRODUCTO
-function botonAgregarCarrito(){
-    filtrado.forEach(producto =>{
-        document.getElementById(`addCart${producto.id}`).addEventListener("click",function(){
-            let cantidad = producto.cantidad;
-            cantidad > 0? agregarAlCarrito(producto):alert("No hay stock");
-            itemsCarrito();
-        });
-    });
-}
-
 //FUNCIÓN PARA AGREGAR AL CARRITO, SI EL PRODUCTO YA SE ENCUENTRA EN EL CARRITO SE SUMA UNA UNIDAD AL PRODUCTO EN VEZ DE DUPLICARSE
-function agregarAlCarrito(producto){
-    let elementoExistente = carrito.find((elemento) => elemento.producto.id == producto.id);
-    if(elementoExistente) {
-        elementoExistente.cantidad+=1;
+function agregarAlCarrito(productoNuevo){
+    let elementoExistente = carrito.find((elemento) => elemento.id == productoNuevo.id);
+    if(elementoExistente == undefined) {
+        let prodACarrito = {
+            ...productoNuevo,
+            cantidad:1
+        };
+        carrito.push(prodACarrito);
     } else {
-        let productoNuevo = new Carrito(producto, 1);
-        carrito.push(productoNuevo);
+        elementoExistente.cantidad+=1;
     }
     // https://github.com/apvarun/toastify-js/blob/master/README.md
     Toastify({
-        text: `${producto.nombre} agregado al carrito de compra`,
+        text: `${productoNuevo.nombre} agregado al carrito de compra`,
         duration: 1500,
         position: 'center',
         className: "toastPersonalizado",
@@ -93,6 +101,7 @@ function agregarAlCarrito(producto){
         }
     }).showToast();
     setearCarrito();
+    itemsCarrito();
 }
 
 //IMPRESIÓN DEL CARRITO, DISPONIBLE EN TODO EL SITIO COMO UN SWAL, CLICKEANDO EN EL ICONO DEL CARRITO
@@ -108,7 +117,7 @@ function imprimirCarrito(){
                 customClass: "cart",
                 position: 'top-end',
                 html: " ",
-                footer:`<p id="total"></p><div class="botonesCart"><a href="" id="cleanCart">Vaciar el carrito</a><a href="" id="buy">Comprar</a></div>`,
+                footer:`<p id="total"></p><div class="botonesCart"><a href="" id="cleanCart">Vaciar el carrito</a><button href="" id="buy">Comprar</button></div>`,
                 showClass: {
                   popup: `
                     animate__animated
@@ -127,7 +136,6 @@ function imprimirCarrito(){
                 showConfirmButton: false,
                 showCloseButton: true,
                 didOpen: () => {
-                    console.log(carrito);
                     if(carrito.length == 0){
                         console.log(carrito);
                         Swal.update({
@@ -141,32 +149,33 @@ function imprimirCarrito(){
             let cardCarrito = Swal.getHtmlContainer();
                 cardCarrito.innerHTML = "";
                 carrito.forEach((elemento) => {
-                    let precioConIva = elemento.producto.precio * 1.21;
+                    let pesificar = elemento.precio*dolarBlueVenta;
+                    let precioConIva = pesificar * 1.21;
                     let productoCart = document.createElement("div");
                     productoCart.className = "productoCart";
                     productoCart.innerHTML += `
                     <div class="card mb-3 cartaCarrito">
                         <div class="row g-0">
                             <div class="col-3">
-                                <img src="./assets/${elemento.producto.imagen}" class="img-fluid rounded-start" alt="${elemento.producto.nombre}">
+                                <img src="./assets/${elemento.imagen}" class="img-fluid rounded-start" alt="${elemento.nombre}">
                             </div>
                             <div class="col-6 cartaCarritoContainer">
                                 <div class="card-body cartaCarritoBody">
-                                    <h5 class="card-title">${elemento.producto.nombre}</h5>
+                                    <h5 class="card-title">${elemento.nombre}</h5>
                                     <div class="cartaCarritoCantidad">
                                         <p class="card-text">$${estandarPrecio.format(precioConIva)}<small class="text-muted"></small></p>
                                         <div class="cantidad">
-                                            <div class="value-button" id="decrease ${elemento.producto.id}" value="Decrease Value">-</div>
-                                            <input type="number" class="inputCart" id="cantidad-producto-${elemento.producto.id}" value="${elemento.cantidad}" min="1" max="1000" step="1"/>
-                                            <div class="value-button" id="increase ${elemento.producto.id}" value="Increase Value">+</div>
+                                            <div class="value-button" id="decrease ${elemento.id}" value="Decrease Value">-</div>
+                                            <input type="number" class="inputCart" id="cantidad-producto-${elemento.id}" value="${elemento.cantidad}" min="1" max="1000" step="1"/>
+                                            <div class="value-button" id="increase ${elemento.id}" value="Increase Value">+</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-3 cartaCarritoContainer">
                                 <div class="card-body cartaCarritoBody">
-                                    <a href="#" class="card-title basura" id="removeCart${elemento.producto.id}"><i class="fa-solid fa-trash-can"></i></a>
-                                    <p class="card-text" id="precio-producto-${elemento.producto.id}">$${estandarPrecio.format(precioConIva*elemento.cantidad)}</p>
+                                    <a href="#" class="card-title basura" id="removeCart${elemento.id}"><i class="fa-solid fa-trash-can"></i></a>
+                                    <p class="card-text" id="precio-producto-${elemento.id}">$${estandarPrecio.format(precioConIva*elemento.cantidad)}</p>
                                 </div>
                             </div>
                         </div>
@@ -175,11 +184,9 @@ function imprimirCarrito(){
         
                     cardCarrito.append(productoCart);
         
-                    total+=elemento.cantidad*precioConIva;
+                    let cantidadProductos = document.getElementById(`cantidad-producto-${elemento.id}`);
         
-                    let cantidadProductos = document.getElementById(`cantidad-producto-${elemento.producto.id}`);
-        
-                    let precioTotalProducto = document.getElementById(`precio-producto-${elemento.producto.id}`);
+                    let precioTotalProducto = document.getElementById(`precio-producto-${elemento.id}`);
         
                     let totalCompra = document.getElementById("total");
         
@@ -195,7 +202,6 @@ function imprimirCarrito(){
                         elemento.cantidad = parseInt(cantidadProductos.value);
                         precioTotalProducto.innerHTML = `$${estandarPrecio.format(precioConIva*elemento.cantidad)}`;
                         total -=precioConIva;
-                        console.log(total);
                         totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`
                         itemsCarrito(); 
                     }
@@ -208,16 +214,15 @@ function imprimirCarrito(){
                         localStorage.setItem("carrito",JSON.stringify(carrito));
                         precioTotalProducto.innerHTML = `$${estandarPrecio.format(precioConIva*elemento.cantidad)}`;
                         total += precioConIva;
-                        console.log(total);
                         totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`
                         itemsCarrito(); 
                     }
         
-                    document.getElementById(`decrease ${elemento.producto.id}`).onclick=()=>decreaseValue(total);
+                    document.getElementById(`decrease ${elemento.id}`).onclick=()=>decreaseValue(total);
         
-                    document.getElementById(`increase ${elemento.producto.id}`).onclick=()=>increaseValue(total);
+                    document.getElementById(`increase ${elemento.id}`).onclick=()=>increaseValue(total);
         
-                    let borrarProducto = document.getElementById(`removeCart${elemento.producto.id}`);
+                    let borrarProducto = document.getElementById(`removeCart${elemento.id}`);
                     
                     //ELIMINAR UN SOLO PRODUCTO
                     borrarProducto.addEventListener("click", (e) => {
@@ -225,7 +230,7 @@ function imprimirCarrito(){
                         productoCart.remove();
                         // https://github.com/apvarun/toastify-js/blob/master/README.md
                         Toastify({
-                            text: `${elemento.producto.nombre} eliminado del carrito de compra`,
+                            text: `${elemento.nombre} eliminado del carrito de compra`,
                             duration: 1500,
                             position: 'center',
                             className: "toastPersonalizado",
@@ -239,9 +244,9 @@ function imprimirCarrito(){
                     });
         
                     vaciarCarrito();
-                    
+                    comprarCarrito();
                     //TOTAL DE COMPRA
-                    totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`  
+                    totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(calcularTotal())}</strong>`  
                 });
             setearCarrito();
         //SI EL CARRITO ESTA VACÍO SE IMPRIME EL ELSE    
@@ -274,9 +279,19 @@ function imprimirCarrito(){
     });
 };
 
+function calcularTotal() {
+    total = 0;
+    for (const elemento of carrito) {
+        let pesificar = elemento.precio*dolarBlueVenta;
+        let precioConIva = pesificar * 1.21;
+        total+=elemento.cantidad*precioConIva;
+    }
+    return total;
+}
+
 //FUNCIÓN PARA ELIMINAR UN SOLO PRODUCTO DEL CARRITO
 function eliminarProductoCarrito(elementoAEliminar) {
-    const elementosAMantener = carrito.filter((elemento) => elementoAEliminar.producto.id != elemento.producto.id);
+    const elementosAMantener = carrito.filter((elemento) => elementoAEliminar.id != elemento.id);
     carrito.length = 0;
     elementosAMantener.forEach((elemento) => carrito.push(elemento));
     setearCarrito();
@@ -288,7 +303,6 @@ function itemsCarrito(){
     carrito.forEach((elemento) => {
         cantidad += parseInt(elemento.cantidad);
     });
-    // console.log(cantidad);
     let items = document.querySelector(".items");
     items.innerText = `${cantidad}`
 }
@@ -299,6 +313,18 @@ function vaciarCarrito(){
     document.getElementById("cleanCart").addEventListener("click", function(){
         carrito.length = 0;
         setearCarrito();
+    });
+}
+
+function comprarCarrito(){
+    document.getElementById("buy").addEventListener("click", function(){
+        Swal.fire({
+            title: "Completa tus datos para realizar tu compra"
+        })
+
+        carrito.length = 0;
+        setearCarrito();
+        itemsCarrito();
     });
 }
 
