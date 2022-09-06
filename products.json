@@ -3,7 +3,7 @@
     "nombre": "Base Dior",
     "categoria": "Bases",
     "precio": 54,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "bases/DiorForever.jpg",
     "cantidad": 10
 },
@@ -12,7 +12,7 @@
     "nombre": "Base Anastasia",
     "categoria": "Bases",
     "precio": 38,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "bases/Anastasia.jpg",
     "cantidad": 10
 },
@@ -21,7 +21,7 @@
     "nombre": "Base Elf",
     "categoria": "Bases",
     "precio": 6,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "bases/Elf.jpg",
     "cantidad": 10
 },
@@ -30,7 +30,7 @@
     "nombre": "Base Fenty",
     "categoria": "Bases",
     "precio": 39,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "bases/Fenty.jpg",
     "cantidad": 10
 },
@@ -39,7 +39,7 @@
     "nombre": "Labial CT",
     "categoria": "Labiales",
     "precio": 34,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "labiales/CharlotteTilbury.jpg",
     "cantidad": 10
 },
@@ -48,7 +48,7 @@
     "nombre": "Labial Fenty",
     "categoria": "Labiales",
     "precio": 26,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "labiales/Fenty.jpg",
     "cantidad": 10
 },
@@ -57,7 +57,7 @@
     "nombre": "Labial HausLabs",
     "categoria": "Labiales",
     "precio": 24,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "labiales/HausLabs.jpg",
     "cantidad": 10
 },
@@ -66,7 +66,7 @@
     "nombre": "Labial PatMcGrath",
     "categoria": "Labiales",
     "precio": 39,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "labiales/PatMcGrath.jpg",
     "cantidad": 10
 },
@@ -75,7 +75,7 @@
     "nombre": "Mascara Benefit",
     "categoria": "Mascaras",
     "precio": 27,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "mascaras/Benefit.jpg",
     "cantidad": 10
 },
@@ -84,7 +84,7 @@
     "nombre": "Mascara Hourglass",
     "categoria": "Mascaras",
     "precio": 29,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "mascaras/Hourglass.jpg",
     "cantidad": 10
 },
@@ -93,7 +93,7 @@
     "nombre": "Mascara Lancome",
     "categoria": "Mascaras",
     "precio": 32,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "mascaras/Lancome.jpg",
     "cantidad": 10
 },
@@ -102,7 +102,7 @@
     "nombre": "Mascara Maybelline",
     "categoria": "Mascaras",
     "precio": 12.99,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "mascaras/MaybellineSkyHigh.jpg",
     "cantidad": 10
 },
@@ -111,7 +111,7 @@
     "nombre": "Paleta Anastasia",
     "categoria": "Paletas",
     "precio": 45,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "paletas/Anastasia.jpg",
     "cantidad": 10
 },
@@ -120,7 +120,7 @@
     "nombre": "Paleta Colourpop",
     "categoria": "Paletas",
     "precio": 34,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "paletas/ColourpopBareNecessities.jpg",
     "cantidad": 10
 },
@@ -129,7 +129,7 @@
     "nombre": "Paleta ND",
     "categoria": "Paletas",
     "precio": 65,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "paletas/NatashaDenonaPastel.jpg",
     "cantidad": 10
 },
@@ -138,7 +138,7 @@
     "nombre": "Paleta Pat McGrath",
     "categoria": "Paletas",
     "precio": 128,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "paletas/PatMagrath.jpg",
     "cantidad": 10
 },
@@ -147,7 +147,7 @@
     "nombre": "Brocha Fenty",
     "categoria": "Brochas",
     "precio": 36,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "brochas/Fenty.jpg",
     "cantidad": 10
 },
@@ -156,7 +156,7 @@
     "nombre": "Brochas Morphe",
     "categoria": "Brochas",
     "precio": 38,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "brochas/MorpheJaclyn.jpg",
     "cantidad": 10
 },
@@ -165,7 +165,7 @@
     "nombre": "Brochas RT",
     "categoria": "Brochas",
     "precio": 19.99,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "brochas/RealTechniques.jpg",
     "cantidad": 10
 },
@@ -174,7 +174,7 @@
     "nombre": "Brochas Sigma",
     "categoria": "Brochas",
     "precio": 73,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "brochas/Sigma.jpg",
     "cantidad": 10
 },
@@ -183,7 +183,7 @@
     "nombre": "Esmalte ILNP",
     "categoria": "Esmaltes",
     "precio": 10,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "esmaltes/ILNP.jpg",
     "cantidad": 10
 },
@@ -192,7 +192,7 @@
     "nombre": "Esmalte ILNP",
     "categoria": "Esmaltes",
     "precio": 10,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "esmaltes/ILNPHiFi.jpg",
     "cantidad": 10
 },
@@ -201,7 +201,7 @@
     "nombre": "Esmalte ILNP",
     "categoria": "Esmaltes",
     "precio": 10,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "esmaltes/ILNPMulticolored.jpg",
     "cantidad": 10
 },
@@ -210,7 +210,7 @@
     "nombre": "Esmalte ILNP",
     "categoria": "Esmaltes",
     "precio": 10,
-    "descripcion": "Lorem Ipsum",
+    "descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis repellat necessitatibus quidem mollitia enim nulla possimus, assumenda vitae esse pariatur voluptas, illo suscipit soluta temporibus autem facilis culpa? Eaque!",
     "imagen": "esmaltes/ILNPRadiant.jpg",
     "cantidad": 10
 }

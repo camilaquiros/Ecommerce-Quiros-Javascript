@@ -1,3 +1,7 @@
+let divSelects = document.querySelector(".divSelects")
+let divOrdenar = document.querySelector(".divOrdenar");
+
+obtenerValorDolar();
 JSONImprimirProductos();
 JSONFiltrarPorCategorias();
 ordenarPor();
@@ -11,17 +15,23 @@ function filtrarPorCategoria(){
         //SEGÚN LA SELECCIÓN DEL USUARIO SE IMPRIMEN LAS TARJETAS DE LOS PRODUCTOS SOLO PERTENECIENTES A LA CATEGORIA CORRESPONDIENTE
         selectCategoria.onchange = () => {
             if(selectCategoria.value == "todos"){
+                divSelects.appendChild(divOrdenar);
                 JSONImprimirProductos();
             } else {
                 JSONProductos();
+                if(document.body.contains(divOrdenar)){
+                    divSelects.removeChild(divOrdenar);
+                }
+                // console.log(divOrdenar)
                 productos = productos.filter((producto) => producto.categoria == selectCategoria.value);
-                console.log(productos);
                 imprimirProductos();
             }
         };
     };
 };
 
+
+//FUNCIÓN PARA LEER EL JSON DE PRODUCTOS
 async function JSONProductos(){
     const URLJSON = "./products.json"
     const respuesta = await fetch(URLJSON)
@@ -29,6 +39,8 @@ async function JSONProductos(){
     productos = data;
 }
 
+
+//FUNCIÓN PARA LEER Y REALIZAR EL FILTRADO SEGÚN CATEGORIA
 async function JSONFiltrarPorCategorias(){
     const URLJSONCategorias = "./categories.json";
     const URLJSONProductos = "./products.json";

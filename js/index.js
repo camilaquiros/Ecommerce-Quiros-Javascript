@@ -1,5 +1,6 @@
 botonMostrarTodos();
 JSONImprimirCategorias();
+obtenerValorDolar();
 
 //MOSTRAR TARJETAS DE CATEGORIAS EN EL INDEX
 function imprimirCategorias(){
@@ -7,12 +8,16 @@ function imprimirCategorias(){
         let caratula=document.createElement("div");
         caratula.className="categoria";
         caratula.innerHTML=`
-            <a href="">
+            <a href="allProducts.html" id="${categoria.titulo}">
             <img src="./assets/${categoria.caratula}" alt="${categoria.titulo}">
             <p>${categoria.titulo}</p>
             </a>
         `;
         caratulas.append(caratula);
+        enlaceCategoria = document.getElementById(`${categoria.titulo}`);
+        enlaceCategoria.onclick = () => {
+
+        }
     }
 }
 

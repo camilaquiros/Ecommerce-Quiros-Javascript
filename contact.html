@@ -43,18 +43,18 @@
     <main>
         <div class="contact">
             <h2>CONTACTO</h2>
-            <form action="" method="" enctype="">
+            <form id="contacto" enctype="" action="https://formsubmit.co/74b5d35095b20bd5eddd13245a4ee8d8" method="POST" class="needs-validation"novalidate>
                 <div class="mb-3 col-sm-7 contactForm">
-                    <label for="formGroupExampleInput" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput">
+                    <label for="validationCustom01" class="form-label">Nombre:</label>
+                    <input type="text" class="form-control" id="validationCustom01" required>
                 </div>
                 <div class="mb-3 col-sm-7 contactForm">
                     <label for="exampleFormControlInput1" class="form-label">Email:</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                    <input type="email" name="email" class="form-control" id="exampleFormControlInput1" required>
                 </div>
                 <div class="mb-3 contactForm">
                     <label for="exampleFormControlTextarea1" class="form-label">Contanos como podemos ayudarte</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="message" required></textarea>
                 </div>
                 <div class="col-12 contactForm">
                     <button class="btn btn-primary animate__headShake" id="button" type="submit">Enviar</button>
@@ -92,7 +92,8 @@
         <p class="parrafoMobile">Desarrollado por <a href="https://portafolio-camilaq.000webhostapp.com/index.html">Camila Quirós</a></p>
     </footer>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="./js/products.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="./js/main.js"></script>
+    <script src="./js/contact.js"></script>
 </body>
 </html>
