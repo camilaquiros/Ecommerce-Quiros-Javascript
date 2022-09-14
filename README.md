@@ -1,4 +1,4 @@
-# ecommerce-quiros
+# Ecommerce-Quiros
 
 Para este proyecto realice un E-commerce de maquillaje importado, los precios están ingresados por json en dólares a precios de tiendas reales y trasladados a pesos a dólar Blue por medio de una API. 
 Hay un Index con distintas categorias traídas desde otro json, que abren un modal con los productos de la categoria correspondiente. Hay una pagina de productos que inicialmente muestra todos los productos, teniendo también la opción de filtrar por categoria u ordenar según 4 criterios distintos. Al usar el filtro se elimina la posibilidad de ordenar los productos, eliminando el select de ordenando. Por ultimo hay una barra de buscador que despliega una lista de coincidencias a partir del tipeo de dos caracteres. Todas las cartas de productos en todas estas instancias son funcionales, con el botón de Agregar al carrito funcional y en caso de clickeo en otra parte de la carta se despliega un modal con información individual del producto provisto por el json.
