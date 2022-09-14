@@ -1,11 +1,13 @@
 let productos = [];
 let carrito = [];
 let categorias = [];
-const estandarPrecio = Intl.NumberFormat('es-ES', {minimumFractionDigits: 2});
+const estandarPrecio = Intl.NumberFormat('es-ES', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 let cardProducto = document.getElementById("productos");
 let botonTodosLosProductos = document.getElementById("allProducts");
 let caratulas=document.getElementById("categorias");
 let divLista = document.getElementById("divLista");
+let selectCategoria = document.getElementById("filtro");
+let URLLocal = document.URL;
 let total = 0;
 let filtrado = productos;
 let dolarBlueVenta;
@@ -35,12 +37,27 @@ function traerCarrito(){
 }
 
 //FUNCIÓN PARA OBTENER EL VALOR DEL DÓLAR BLUE EN TIEMPO REAL
-async function obtenerValorDolar() {
+async function obtenerValorDolarProductos() {
     const URLDOLAR = "https://api-dolar-argentina.herokuapp.com/api/dolarblue";
     const respuesta = await fetch(URLDOLAR)
     const data = await respuesta.json();
     dolarBlueVenta = data.venta;
     imprimirProductos();
+}
+
+async function obtenerValorDolar() {
+    const URLDOLAR = "https://api-dolar-argentina.herokuapp.com/api/dolarblue";
+    const respuesta = await fetch(URLDOLAR)
+    const data = await respuesta.json();
+    dolarBlueVenta = data.venta;
+}
+
+//FUNCIÓN PARA LEER EL JSON DE PRODUCTOS
+async function JSONProductos(){
+    const URLJSON = "./products.json"
+    const respuesta = await fetch(URLJSON)
+    const data = await respuesta.json()
+    productos = data;
 }
 
 //MOSTRAR TARJETAS DE PRODUCTOS
@@ -51,13 +68,13 @@ function imprimirProductos(){
         let precioConIva = pesificar * 1.21;
         cardProducto.innerHTML += `
             <div class="producto">
-                <button  id="showProduct${producto.id}">
+                <button  id="showProduct${producto.id}" class="botonProducto">
                 <img src="./assets/${producto.imagen}" alt="${producto.nombre}">
                 <p>${producto.nombre}</p>
                 <p>$${estandarPrecio.format(precioConIva)}</p>
                 <p>Disponibles: ${producto.cantidad}</p>
                 </button>
-                <button id="addCart${producto.id}">AGREGAR AL CARRITO</button>
+                <button id="addCart${producto.id}" class="botonCarrito">AGREGAR AL CARRITO</button>
             </div>
         `;
     }
@@ -77,8 +94,8 @@ function imprimirProductos(){
                   <div class="col-md-8">
                     <div class="card-body">
                       <p class="card-text">${producto.descripcion}</p>
-                      <p class="card-text">$${estandarPrecio.format(precioConIva)}</p>
-                      <button id="addCartIndividual${producto.id}">AGREGAR AL CARRITO</button>
+                      <p class="card-text"><strong>$${estandarPrecio.format(precioConIva)}</strong></p>
+                      <button id="addCartIndividual${producto.id}" class="botonCarritoIndividual">AGREGAR AL CARRITO</button>
                     </div>
                   </div>
                 </div>
@@ -86,6 +103,8 @@ function imprimirProductos(){
               showConfirmButton: false,
               showCloseButton: true,
               customClass: "cardIndividual",
+              width: "60%",
+              background: "#04BAD8",
             });
             document.getElementById(`addCartIndividual${producto.id}`).onclick = function(){
                 let cantidad = producto.cantidad;
@@ -109,7 +128,7 @@ async function JSONImprimirProductos() {
     const respuesta = await fetch(URLJSON)
     const data = await respuesta.json()
     productos = data;
-    imprimirProductos();
+    obtenerValorDolarProductos();
 }
 
 //FUNCIÓN PARA AGREGAR AL CARRITO, SI EL PRODUCTO YA SE ENCUENTRA EN EL CARRITO SE SUMA UNA UNIDAD AL PRODUCTO EN VEZ DE DUPLICARSE
@@ -349,7 +368,7 @@ function comprarCarrito(){
     document.getElementById("buy").addEventListener("click", function(){
         Swal.fire({
             title: "Por favor completa los siguientes datos para finalizar tu compra",
-            html: `<form action="">
+            html: `<form action="" class="formCompra">
             <input type="text" class="swal2-input" id="nombre" placeholder="Nombre Completo">
             <input type="email" class="swal2-input" id="email" placeholder="Email">
             <input type="tel" class="swal2-input" id="telefono" placeholder="Teléfono">
@@ -357,26 +376,34 @@ function comprarCarrito(){
             <input type="number" class="swal2-input" id="codigo" placeholder="Codigo Postal">
             <input type="text" class="swal2-input" id="ciudad" placeholder="Ciudad">
             </form>`,
+            color: "#F2FF8D",
             confirmButtonText: "Confirmar",
+            confirmButtonColor: "#FF99C1",
             customClass: "compra",
             focusConfirm: false,
-            preConfirm: () => {
+            background: "#04BAD8",
+            preConfirm: (e) => {
                 const nombre = Swal.getPopup().querySelector("#nombre").value;
                 const email = Swal.getPopup().querySelector("#email").value;
                 const telefono = Swal.getPopup().querySelector("#telefono").value;
                 const direccion = Swal.getPopup().querySelector("#direccion").value;
                 const codigo = Swal.getPopup().querySelector("#codigo").value;
                 const ciudad = Swal.getPopup().querySelector("#ciudad").value;
-
-                !ciudad || !isNaN(ciudad)? Swal.showValidationMessage('Ciudad incorrecta'): '';
-                !codigo || isNaN(codigo)? Swal.showValidationMessage('Código Postal incorrecto'): '';
-                !direccion? Swal.showValidationMessage('Dirección incorrecta'): '';
-                !telefono || isNaN(telefono)? Swal.showValidationMessage('Teléfono incorrecto'): '';
+                !isNaN(ciudad)? Swal.showValidationMessage('La ciudad no puede estar compuesta por números'): '';
+                !ciudad? Swal.showValidationMessage('Ciudad obligatoria'): '';
+                isNaN(codigo)? Swal.showValidationMessage('El Código Postal debe estar compuesto por números'): '';
+                !codigo? Swal.showValidationMessage('Código Postal obligatorio'): '';
+                !direccion? Swal.showValidationMessage('Dirección obligatoria'): '';
+                isNaN(telefono)?Swal.showValidationMessage('El Teléfono debe estar compuesto por números'): '';
+                !telefono? Swal.showValidationMessage('Teléfono obligatorio'): '';
                 const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-                !email || !email.match(validRegex)? Swal.showValidationMessage('Email incorrecto'): '';
-                !nombre || !isNaN(nombre)? Swal.showValidationMessage('Nombre incorrecto'): '';
+                !email.match(validRegex)? Swal.showValidationMessage('Email invalido'): '';
+                !email? Swal.showValidationMessage('Email obligatorio'): '';
+                !isNaN(nombre)? Swal.showValidationMessage('El nombre no puede estar compuesto por números'): '';
+                !nombre? Swal.showValidationMessage('Nombre obligatorio'): '';
 
-                return { nombre: nombre, email: email, telefono: telefono, direccion: direccion, codigo: codigo}
+
+                return { nombre: nombre, email: email, telefono: telefono, direccion: direccion, codigo: codigo, ciudad: ciudad}
             } 
         }).then((resultado) => {
             Swal.fire({
@@ -407,11 +434,13 @@ function comprarCarrito(){
 //BARRA DE BUSCADOR, A PARTIR DEL TIPEO DE LETRAS SE DESPLIEGA UNA LISTA DE COINCIDENCIAS DENTRO DE LOS PRODUCTOS
 // https://www.w3schools.com/howto/howto_js_autocomplete.asp
 function buscador(){
+    obtenerValorDolar();  
     buscar = document.getElementById("buscador");
     divBuscador = document.getElementById("divBuscador");
     buscar.addEventListener("input", () => {
         divLista.innerHTML = "";
         divLista.style.border = "none";
+        JSONProductos();
         let filtro = productos.filter((item)=>item.nombre.toLowerCase().includes(buscar.value.toLowerCase()));
         if(buscar.value.length > 1 && filtro.length != 0){
             filtro.forEach((item) => {
@@ -420,7 +449,7 @@ function buscador(){
                 let cartaSugerencia = document.createElement("div");
                 cartaSugerencia.className = "card mb-3 divCarta";
                 cartaSugerencia.innerHTML = `
-                    <button id = "showProductBuscador${item.id}">
+                    <button id = "showProductBuscador${item.id}" class="botonBuscador">
                     <div class="row g-0">
                         <div class="col-md-4">
                             <img src="./assets/${item.imagen}" class="img-fluid rounded-start" alt="${item.nombre}">
@@ -448,7 +477,7 @@ function buscador(){
                             <div class="card-body">
                               <p class="card-text">${item.descripcion}</p>
                               <p class="card-text">$${estandarPrecio.format(precioConIva)}</p>
-                              <button id="addCartBuscador${item.id}">AGREGAR AL CARRITO</button>
+                              <button id="addCartBuscador${item.id}" class="botonCarritoIndividual">AGREGAR AL CARRITO</button>
                             </div>
                           </div>
                         </div>
@@ -456,6 +485,8 @@ function buscador(){
                       showConfirmButton: false,
                       showCloseButton: true,
                       customClass: "cardIndividual",
+                      width: "60%",
+                      background: "#04BAD8",
                     });
                     document.getElementById(`addCartBuscador${item.id}`).onclick = function(){
                         let cantidad = item.cantidad;

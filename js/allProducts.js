@@ -1,14 +1,12 @@
 let divSelects = document.querySelector(".divSelects")
 let divOrdenar = document.querySelector(".divOrdenar");
 
-obtenerValorDolar();
 JSONImprimirProductos();
 JSONFiltrarPorCategorias();
 ordenarPor();
 
 //FILTRADO DE PRODUCTOS POR CATEGORIA
 function filtrarPorCategoria(){
-    let selectCategoria = document.getElementById("filtro");
     for (const categoria of categorias) {
         selectCategoria.innerHTML += `<option id="categoria${categoria.id}">${categoria.titulo}</option>`
 
@@ -30,16 +28,6 @@ function filtrarPorCategoria(){
     };
 };
 
-
-//FUNCIÓN PARA LEER EL JSON DE PRODUCTOS
-async function JSONProductos(){
-    const URLJSON = "./products.json"
-    const respuesta = await fetch(URLJSON)
-    const data = await respuesta.json()
-    productos = data;
-}
-
-
 //FUNCIÓN PARA LEER Y REALIZAR EL FILTRADO SEGÚN CATEGORIA
 async function JSONFiltrarPorCategorias(){
     const URLJSONCategorias = "./categories.json";
@@ -56,6 +44,7 @@ async function JSONFiltrarPorCategorias(){
 // https://www.codegrepper.com/code-examples/javascript/sort+the+products+by+their+price+using+js
 // ORDENADO DE PRODUCTOS SEGÚN PRECIO Y NOMBRE, BASADO EN LA SELECCIÓN DEL USUARIO
 function ordenarPor(){
+    obtenerValorDolar();
     let selectOrdenar = document.getElementById("ordenar");
     selectOrdenar.onchange = () => {
         switch(selectOrdenar.value){

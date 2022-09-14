@@ -76,7 +76,7 @@ header{
 }
 
 .iconos {
-  @include flex(inline-flex, wrap, null, space-between ,center);
+  @include flex(inline-flex, wrap, null, flex-end ,center);
   align-self: flex-start;
   justify-self: flex-end;
   width: 25vw;
@@ -114,6 +114,7 @@ header{
 #divBuscador{
   position: relative;
   width: 70%;
+  margin: 0 3%;
 
   &::-webkit-scrollbar {
     width: 0;
@@ -142,6 +143,11 @@ header{
   &::-webkit-scrollbar {
     width: 0;
   }
+}
+
+.botonBuscador{
+  background-color: transparent;
+  border: 0;
 }
 
 .divCarta, .buscadorVacio{

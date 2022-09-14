@@ -1,25 +1,4 @@
-botonMostrarTodos();
 JSONImprimirCategorias();
-obtenerValorDolar();
-
-//MOSTRAR TARJETAS DE CATEGORIAS EN EL INDEX
-function imprimirCategorias(){
-    for(const categoria of categorias){
-        let caratula=document.createElement("div");
-        caratula.className="categoria";
-        caratula.innerHTML=`
-            <a href="allProducts.html" id="${categoria.titulo}">
-            <img src="./assets/${categoria.caratula}" alt="${categoria.titulo}">
-            <p>${categoria.titulo}</p>
-            </a>
-        `;
-        caratulas.append(caratula);
-        enlaceCategoria = document.getElementById(`${categoria.titulo}`);
-        enlaceCategoria.onclick = () => {
-
-        }
-    }
-}
 
 async function JSONImprimirCategorias(){
     const URLJSON = "./categories.json";
@@ -29,15 +8,40 @@ async function JSONImprimirCategorias(){
     imprimirCategorias();
 }
 
-//BOTÓN UBICADO EN EL INDEX PARA MOSTRAR TODOS LOS PRODUCTOS
-function botonMostrarTodos(){
-    botonTodosLosProductos.onclick = () => {
-        if(botonTodosLosProductos.innerText == "Mostrar todos los productos"){
-            JSONImprimirProductos();
-            botonTodosLosProductos.innerText = "Ocultar todos los productos";
-            } else {
-                cardProducto.innerHTML = "";
-                botonTodosLosProductos.innerText = "Mostrar todos los productos";
+//MOSTRAR TARJETAS DE CATEGORIAS EN EL INDEX
+function imprimirCategorias(){
+    JSONProductos();
+    obtenerValorDolar();
+    for(const categoria of categorias){
+        let caratula=document.createElement("div");
+        caratula.className="categoria";
+        caratula.innerHTML=`
+            <button id="categoria${categoria.id}">
+            <img src="./assets/${categoria.caratula}" alt="${categoria.titulo}">
+            <h5>${categoria.titulo}</h5>
+            </button>
+        `;
+        let divProductos = document.createElement("div")
+        divProductos.id = `productos${categoria.id}`;
+        caratulas.append(caratula);
+        caratulas.append(divProductos);
+        enlaceCategoria = document.getElementById(`categoria${categoria.id}`);
+        enlaceCategoria.onclick = () => {
+            JSONProductos();
+            productos = productos.filter((producto) => producto.categoria == categoria.titulo);
+
+            Swal.fire({
+                titleText: `${categoria.titulo}`,
+                html: "",
+                customClass: "divProductos" ,
+                background: "#BF9EEC",
+                showCloseButton: true,
+                showConfirmButton: false,
+            })
+            let swalCategorias = Swal.getHtmlContainer()
+            swalCategorias.id = "productos";
+            cardProducto = document.getElementById("productos");
+            imprimirProductos();
         }
     }
 }

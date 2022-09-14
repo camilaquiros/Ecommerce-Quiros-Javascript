@@ -15,7 +15,7 @@ body.swal2-shown > [aria-hidden="true"] {
     padding: 0.5% 1%;
     @extend %rosado;
     color: $amarillo;
-    font-size: 0.7em;
+    font-size: 1.2em;
     font-weight: bold;
     border-radius: 10px;
     display: block;
@@ -46,13 +46,24 @@ body.swal2-shown > [aria-hidden="true"] {
 }
 
 #productos {
-    @include flex(flex, wrap, null, space-between, null);
+    @include flex(flex !important, wrap, null, space-between, null);
     width: 90%;
     margin: 2% 0;
 
     @media screen and(max-width:850px) {
         justify-content: space-around;
       }
+}
+
+.divProductos{
+    width: 90% !important;
+    justify-items: center;
+}
+
+.botonProducto{
+    padding: 0;
+    border: 0;
+    border-radius: 10px 10px 0 0;
 }
 
 .producto {
@@ -86,20 +97,6 @@ body.swal2-shown > [aria-hidden="true"] {
           }
     }
 
-    button {
-        width: 100%;
-        border: none;
-        border-radius: 0 0 15px 15px;
-        background-color: $rosado;
-        color: $amarillo;
-        padding: 2% 5%;
-        font-size: 1.2vw;
-
-        @media screen and(max-width:850px) {
-            font-size: 0.8em;
-          }
-    }
-
     @media screen and(max-width:850px) {
         width: 25%;
     }
@@ -109,10 +106,28 @@ body.swal2-shown > [aria-hidden="true"] {
     }
 }
 
+.botonCarrito{
+    width: 100%;
+    border: none;
+    border-radius: 0 0 10px 10px;
+    background-color: $rosado;
+    color: $amarillo;
+    padding: 2% 5%;
+    font-size: 1.2vw;
+
+    @media screen and(max-width:850px) {
+        font-size: 0.8em;
+      }
+}
+
 #categorias {
     @include flex(flex, wrap, null, space-around, null);
     width: 90%;
-    margin: 1% 0;
+    margin: 1% 0 5% 0;
+}
+
+.caratula{
+    position: relative;
 }
 
 .categoria {
@@ -120,6 +135,12 @@ body.swal2-shown > [aria-hidden="true"] {
     width: 40%;
     animation-duration: 1s;
     margin-top: 3%;
+
+    button{
+        padding: 0;
+        border: 0;
+        background-color: $violeta;
+    }
 
     img {
         width: 100%;
@@ -129,7 +150,7 @@ body.swal2-shown > [aria-hidden="true"] {
         position: relative;
     }
 
-    p {
+    h5 {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -207,4 +228,33 @@ body.swal2-shown > [aria-hidden="true"] {
     @media screen and(max-width:850px) {
         justify-content: flex-start;
     }
+}
+
+.cardIndividual{
+    div{
+        background-color: $turquesa;
+        border: 0;
+    }
+    img{
+        border-radius: 10px !important;
+    }
+}
+
+.botonCarritoIndividual {
+    width: 70%;
+    border: none;
+    border-radius: 10px;
+    background-color: $rosado;
+    color: $amarillo;
+    padding: 2% 5%;
+    font-size: 1.2vw;
+
+    @media screen and(max-width:850px) {
+        font-size: 0.8em;
+      }
+}
+
+.card-body{
+    @include flex(flex, wrap, column, space-between, center);
+    height: 100%;
 }
