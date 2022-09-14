@@ -8,6 +8,8 @@ let errorMensaje = document.getElementById("errorMensaje");
 
 formulario.addEventListener("submit", validarFormulario);
 
+
+//FORMULARIO DE CONTACTO, ENVÍA UN EMAIL A TRAVES DE FORMSPREE
 // https://www.youtube.com/watch?v=qtH8PLuy1Ck&t=12s
 // https://formspree.io
 async function validarFormulario(e){
@@ -36,6 +38,8 @@ async function validarFormulario(e){
   }
 }
 
+
+//TODAS LAS VALIDACIONES QUE DEBEN PASAR LOS INPUTS
 function validarInputsSubmit() {
   !nombreContacto.value? nombreContacto.placeholder = "❌ Nombre obligatorio": "";
   !emailContacto.value? emailContacto.placeholder = "❌ Email obligatorio": "";
@@ -52,6 +56,8 @@ function validarInputsSubmit() {
   })
 }
 
+
+//PARA ELIMINAR MENSAJES PRE-ESTILIZADOS POR HTML
 // Ejemplo de JavaScript inicial para deshabilitar el envío de formularios si hay campos no válidos
 (function () {
   'use strict'

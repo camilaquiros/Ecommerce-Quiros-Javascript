@@ -36,7 +36,7 @@ function traerCarrito(){
         carrito=JSON.parse(localStorage.getItem("carrito")) || [];
 }
 
-//FUNCIÓN PARA OBTENER EL VALOR DEL DÓLAR BLUE EN TIEMPO REAL
+//FUNCIÓN PARA OBTENER EL VALOR DEL DÓLAR BLUE EN TIEMPO REAL, MAS IMPRESIÓN DE PRODUCTOS
 async function obtenerValorDolarProductos() {
     const URLDOLAR = "https://api-dolar-argentina.herokuapp.com/api/dolarblue";
     const respuesta = await fetch(URLDOLAR)
@@ -45,6 +45,7 @@ async function obtenerValorDolarProductos() {
     imprimirProductos();
 }
 
+////FUNCIÓN PARA OBTENER EL VALOR DEL DÓLAR BLUE EN TIEMPO REAL
 async function obtenerValorDolar() {
     const URLDOLAR = "https://api-dolar-argentina.herokuapp.com/api/dolarblue";
     const respuesta = await fetch(URLDOLAR)
@@ -161,146 +162,145 @@ function agregarAlCarrito(productoNuevo){
 function imprimirCarrito(){
     let cartIcon = document.getElementById("cartIcon");
     cartIcon.addEventListener("click", (e) => {
+        // https://sweetalert2.github.io/recipe-gallery/sidebars-drawers.html
+        // https://sweetalert2.github.io/recipe-gallery/blurred-backdrop.html
+        Swal.fire({
+            title: 'Carrito de compras',
+            customClass: "cart",
+            position: 'top-end',
+            html: " ",
+            footer: " ",
+            showClass: {
+                popup: `
+                animate__animated
+                animate__fadeInRight
+                animate__faster
+                `
+            },
+            hideClass: {
+                popup: `
+                animate__animated
+                animate__fadeOutRight
+                animate__faster
+                `
+            },
+            background: '#BF9EEC',
+            showConfirmButton: false,
+            showCloseButton: true,
+        });
+        //DEBIDO A LA COMPLEJIDAD DEL HTML CONSIDERE MEJOR TRATARLO COMO UN MÉTODO DE SWAL Y NO ENCERRARLO DENTRO DEL MISMO
+        // https://sweetalert2.github.io/#methods
+        let cardCarrito = Swal.getHtmlContainer();
+        let footerCarrito = Swal.getFooter();
+        cardCarrito.innerHTML = "";
+        footerCarrito.innerHTML = "";
         //SI EL CARRITO NO ESTA VACÍO SE IMPRIME TODO DENTRO DEL IF
-        // if(carrito.length != 0){
-            // https://sweetalert2.github.io/recipe-gallery/sidebars-drawers.html
-            // https://sweetalert2.github.io/recipe-gallery/blurred-backdrop.html
-            Swal.fire({
-                title: 'Carrito de compras',
-                customClass: "cart",
-                position: 'top-end',
-                html: " ",
-                footer: " ",
-                showClass: {
-                  popup: `
-                    animate__animated
-                    animate__fadeInRight
-                    animate__faster
-                  `
-                },
-                hideClass: {
-                  popup: `
-                    animate__animated
-                    animate__fadeOutRight
-                    animate__faster
-                  `
-                },
-                background: '#BF9EEC',
-                showConfirmButton: false,
-                showCloseButton: true,
-            });
-            //DEBIDO A LA COMPLEJIDAD DEL HTML CONSIDERE MEJOR TRATARLO COMO UN MÉTODO DE SWAL Y NO ENCERRARLO DENTRO DEL MISMO
-            // https://sweetalert2.github.io/#methods
-            let cardCarrito = Swal.getHtmlContainer();
-            let footerCarrito = Swal.getFooter();
-            cardCarrito.innerHTML = "";
-            footerCarrito.innerHTML = "";
-            if(carrito.length != 0) {
-                traerCarrito();
-                footerCarrito.innerHTML = `<p id="total"></p><div class="botonesCart"><button id="cleanCart">Vaciar el carrito</button><button href="" id="buy">Comprar</button></div>`
-                carrito.forEach((elemento) => {
-                    let pesificar = elemento.precio*dolarBlueVenta;
-                    let precioConIva = pesificar * 1.21;
-                    let productoCart = document.createElement("div");
-                    productoCart.className = "productoCart";
-                    productoCart.innerHTML += `
-                    <div class="card mb-3 cartaCarrito">
-                        <div class="row g-0">
-                            <div class="col-3">
-                                <img src="./assets/${elemento.imagen}" class="img-fluid rounded-start" alt="${elemento.nombre}">
-                            </div>
-                            <div class="col-6 cartaCarritoContainer">
-                                <div class="card-body cartaCarritoBody">
-                                    <h5 class="card-title">${elemento.nombre}</h5>
-                                    <div class="cartaCarritoCantidad">
-                                        <p class="card-text">$${estandarPrecio.format(precioConIva)}</p>
-                                        <div class="cantidad">
-                                            <div class="value-button" id="decrease ${elemento.id}" value="Decrease Value">-</div>
-                                            <input type="number" class="inputCart" id="cantidad-producto-${elemento.id}" value="${elemento.cantidad}" min="1" max="1000" step="1"/>
-                                            <div class="value-button" id="increase ${elemento.id}" value="Increase Value">+</div>
-                                        </div>
+        if(carrito.length != 0) {
+            traerCarrito();
+            footerCarrito.innerHTML = `<p id="total"></p><div class="botonesCart"><button id="cleanCart">Vaciar el carrito</button><button href="" id="buy">Comprar</button></div>`
+            carrito.forEach((elemento) => {
+                let pesificar = elemento.precio*dolarBlueVenta;
+                let precioConIva = pesificar * 1.21;
+                let productoCart = document.createElement("div");
+                productoCart.className = "productoCart";
+                productoCart.innerHTML += `
+                <div class="card mb-3 cartaCarrito">
+                    <div class="row g-0">
+                        <div class="col-3">
+                            <img src="./assets/${elemento.imagen}" class="img-fluid rounded-start" alt="${elemento.nombre}">
+                        </div>
+                        <div class="col-6 cartaCarritoContainer">
+                            <div class="card-body cartaCarritoBody">
+                                <h5 class="card-title">${elemento.nombre}</h5>
+                                <div class="cartaCarritoCantidad">
+                                    <p class="card-text">$${estandarPrecio.format(precioConIva)}</p>
+                                    <div class="cantidad">
+                                        <div class="value-button" id="decrease ${elemento.id}" value="Decrease Value">-</div>
+                                        <input type="number" class="inputCart" id="cantidad-producto-${elemento.id}" value="${elemento.cantidad}" min="1" max="1000" step="1"/>
+                                        <div class="value-button" id="increase ${elemento.id}" value="Increase Value">+</div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-3 cartaCarritoContainer">
-                                <div class="card-body cartaCarritoBody">
-                                    <a href="#" class="card-title basura" id="removeCart${elemento.id}"><i class="fa-solid fa-trash-can"></i></a>
-                                    <p class="card-text" id="precio-producto-${elemento.id}">$${estandarPrecio.format(precioConIva*elemento.cantidad)}</p>
-                                </div>
+                        </div>
+                        <div class="col-3 cartaCarritoContainer">
+                            <div class="card-body cartaCarritoBody">
+                                <a href="#" class="card-title basura" id="removeCart${elemento.id}"><i class="fa-solid fa-trash-can"></i></a>
+                                <p class="card-text" id="precio-producto-${elemento.id}">$${estandarPrecio.format(precioConIva*elemento.cantidad)}</p>
                             </div>
                         </div>
                     </div>
-                    `;
-        
-                    cardCarrito.append(productoCart);
-        
-                    let cantidadProductos = document.getElementById(`cantidad-producto-${elemento.id}`);
-        
-                    let precioTotalProducto = document.getElementById(`precio-producto-${elemento.id}`);
-        
-                    let totalCompra = document.getElementById("total");
-        
-                    let value = parseInt(cantidadProductos.value);
-                    
-                    //INPUT HECHO A PARTIR DE UN CODEPEN PARA MOSTRAR SÍMBOLOS + Y - EN LA OPCIÓN DE CANTIDAD
-                    // https://codepen.io/mtbroomell/pen/yNwwdv
-                    function decreaseValue() { 
-                        value = isNaN(value) ? 1 : value;
-                        value < 2 ? value = 2 : '';
-                        value--;
-                        cantidadProductos.value = value;
-                        elemento.cantidad = parseInt(cantidadProductos.value);
-                        precioTotalProducto.innerHTML = `$${estandarPrecio.format(precioConIva*elemento.cantidad)}`;
-                        total -=precioConIva;
-                        totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`
-                        itemsCarrito(); 
-                    }
-        
-                    function increaseValue() {
-                        value = isNaN(value) ? 1 : value;
-                        value++;
-                        cantidadProductos.value = value;
-                        elemento.cantidad = parseInt(cantidadProductos.value);
-                        localStorage.setItem("carrito",JSON.stringify(carrito));
-                        precioTotalProducto.innerHTML = `$${estandarPrecio.format(precioConIva*elemento.cantidad)}`;
-                        total += precioConIva;
-                        totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`
-                        itemsCarrito(); 
-                    }
-        
-                    document.getElementById(`decrease ${elemento.id}`).onclick=()=>decreaseValue(total);
-        
-                    document.getElementById(`increase ${elemento.id}`).onclick=()=>increaseValue(total);
-        
-                    let borrarProducto = document.getElementById(`removeCart${elemento.id}`);
-                    
-                    //ELIMINAR UN SOLO PRODUCTO
-                    borrarProducto.addEventListener("click", (e) => {
-                        eliminarProductoCarrito(elemento);
-                        productoCart.remove();
-                        // https://github.com/apvarun/toastify-js/blob/master/README.md
-                        Toastify({
-                            text: `${elemento.nombre} eliminado del carrito de compra`,
-                            duration: 1500,
-                            position: 'center',
-                            className: "toastPersonalizado",
-                            style: {
-                                background: "#F2FF8D",
-                            }
-                        }).showToast();
-                        total -=elemento.cantidad*precioConIva;
-                        totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`
-                        itemsCarrito(); 
-                    });
-        
-                    // FUNCIONES DE LOS BOTONES DEL FOOTER
-                    vaciarCarrito();
-                    comprarCarrito();
-                    //TOTAL DE COMPRA
-                    totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(calcularTotal())}</strong>`  
+                </div>
+                `;
+    
+                cardCarrito.append(productoCart);
+    
+                let cantidadProductos = document.getElementById(`cantidad-producto-${elemento.id}`);
+    
+                let precioTotalProducto = document.getElementById(`precio-producto-${elemento.id}`);
+    
+                let totalCompra = document.getElementById("total");
+    
+                let value = parseInt(cantidadProductos.value);
+                
+                //INPUT HECHO A PARTIR DE UN CODEPEN PARA MOSTRAR SÍMBOLOS + Y - EN LA OPCIÓN DE CANTIDAD
+                // https://codepen.io/mtbroomell/pen/yNwwdv
+                function decreaseValue() { 
+                    value = isNaN(value) ? 1 : value;
+                    value < 2 ? value = 2 : '';
+                    value--;
+                    cantidadProductos.value = value;
+                    elemento.cantidad = parseInt(cantidadProductos.value);
+                    precioTotalProducto.innerHTML = `$${estandarPrecio.format(precioConIva*elemento.cantidad)}`;
+                    total -=precioConIva;
+                    totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`
+                    itemsCarrito(); 
+                }
+    
+                function increaseValue() {
+                    value = isNaN(value) ? 1 : value;
+                    value++;
+                    cantidadProductos.value = value;
+                    elemento.cantidad = parseInt(cantidadProductos.value);
+                    localStorage.setItem("carrito",JSON.stringify(carrito));
+                    precioTotalProducto.innerHTML = `$${estandarPrecio.format(precioConIva*elemento.cantidad)}`;
+                    total += precioConIva;
+                    totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`
+                    itemsCarrito(); 
+                }
+    
+                document.getElementById(`decrease ${elemento.id}`).onclick=()=>decreaseValue(total);
+    
+                document.getElementById(`increase ${elemento.id}`).onclick=()=>increaseValue(total);
+    
+                let borrarProducto = document.getElementById(`removeCart${elemento.id}`);
+                
+                //ELIMINAR UN SOLO PRODUCTO
+                borrarProducto.addEventListener("click", (e) => {
+                    eliminarProductoCarrito(elemento);
+                    productoCart.remove();
+                    // https://github.com/apvarun/toastify-js/blob/master/README.md
+                    Toastify({
+                        text: `${elemento.nombre} eliminado del carrito de compra`,
+                        duration: 1500,
+                        position: 'center',
+                        className: "toastPersonalizado",
+                        style: {
+                            background: "#F2FF8D",
+                        }
+                    }).showToast();
+                    total -=elemento.cantidad*precioConIva;
+                    totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(total)}</strong>`
+                    itemsCarrito(); 
                 });
-            setearCarrito();
-            } else {
+    
+                // FUNCIONES DE LOS BOTONES DEL FOOTER
+                vaciarCarrito();
+                comprarCarrito();
+                //TOTAL DE COMPRA
+                totalCompra.innerHTML = `Subtotal (sin envío): <strong>$${estandarPrecio.format(calcularTotal())}</strong>`  
+            });
+        setearCarrito();
+        } else {
         // SI EL CARRITO ESTA VACÍO SE IMPRIME EL ELSE 
             traerCarrito();
             cardCarrito.innerHTML = "No hay productos en el carrito!";
@@ -420,7 +420,7 @@ function comprarCarrito(){
                 Swal.fire({
                     title: "¡GRACIAS POR TU COMPRA!",
                     icon: 'success',
-                    timer: 2000,
+                    timer: 3000,
                     showConfirmButton: false,
                 });
                 carrito.length = 0;
